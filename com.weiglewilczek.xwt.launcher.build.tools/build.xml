@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<!-- ======================================================================
+     17.07.2008 14:43
+
+     Releng build
+
+     blank@weiglewilczek.com
+     ====================================================================== -->
+<project name="xwt.launcher.client.releng" default="package.releng.results" basedir=".">
+
+	<property file="properties/build.properties" />
+	<property file="properties/users/${user.name}.properties" />
+	<property file="build.properties" />
+	<property environment="env" />
+	<property name="env.BUILD_MACHINE" value="${env.COMPUTERNAME}" />
+
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="distribute.dir" value="${basedir}/distribute" />
+	<property name="platform.dir" value="${basedir}/platform" />
+	<property name="product.conf.dir" value="${basedir}/etc/product-config" />
+
+	<!-- =================================
+	      target: update.build.version
+	     ================================= -->
+	<target name="update.build.version" depends="clean" description="Updates the client build version.">
+		<echo>UPDATE.BUILD.VERSION</echo>
+
+		<buildnumber file="${version.config.dir}/${client.buildnum.file}" />
+
+		<propertyfile comment="EclipseLauncherX Build Version Information" file="${version.config.dir}/${xwt.launcher.build.version.file}">
+			<entry key="build.version" value="${major.version}.${minor.version}.${service.segment}" />
+			<entry key="release.candidate" value="${release.candidate}" />
+			<entry key="client.build.date" type="date" pattern="dd.MM.yyyy" value="now" />
+			<entry key="client.build.time" type="date" pattern="kk:mm:ss" value="now" />
+			<entry key="build.host" value="${env.COMPUTERNAME}" />
+			<entry key="build.user.name" value="${user.name}" />
+			<entry key="build.os.name" value="${os.name}" />
+			<entry key="client.build.jvm.version" value="${ant.java.version}" />
+			<entry key="client.build.number" value="${build.number}" />
+		</propertyfile>
+
+		<copy todir="${workspace}/com.weiglewilczek.xwt.launcher/src" overwrite="true">
+			<fileset dir="${version.config.dir}">
+				<include name="${xwt.launcher.build.version.file}" />
+			</fileset>
+		</copy>
+		<copy todir="${workspace}/com.weiglewilczek.xwt.launcher/bin" overwrite="true">
+			<fileset dir="${version.config.dir}">
+				<include name="${xwt.launcher.build.version.file}" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- ================================= 
+          target: run.releng.build              
+         ================================= -->
+	<target name="run.releng.build" depends="update.build.version" description="Runs the PDE releng build.">
+		<echo>RUN.RELENG.BUILD</echo>
+
+		<copy todir="${workspace}/com.weiglewilczek.xwt.launcher/etc.temp" overwrite="true">
+			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher">
+				<include name="plugin.xml" />
+			</fileset>
+		</copy>
+
+		<property file="${version.config.dir}/${xwt.launcher.build.version.file}" />
+
+		<copy todir="${workspace}/com.weiglewilczek.xwt.launcher" overwrite="true">
+			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher/etc.temp">
+				<include name="plugin.xml" />
+			</fileset>
+			<filterset>
+				<filter token="BUILD_VERSION" value="${build.version}" />
+				<filter token="RELEASE_CANDIDATE" value="${release.candidate}" />
+				<filter token="BUILD_DATE" value="${client.build.date}" />
+				<filter token="BUILD_TIME" value="${client.build.time}" />
+			</filterset>
+		</copy>
+
+		<ant antfile="${basedir}/build-pde.xml" dir="${basedir}" inheritall="true" />
+
+		<mkdir dir="${build.dir}"/>
+		
+		<unzip dest="${build.dir}">
+			<fileset dir="${productPath}">
+				<include name="${productName}" />
+			</fileset>
+		</unzip>
+		
+		<copy todir="${build.dir}" overwrite="true">
+            <fileset dir="${build.dir}/${archivePrefix}">
+                <include name="**/*" />
+            </fileset>
+		</copy>
+		
+		<delete dir="${build.dir}/${archivePrefix}" failonerror="false" />
+
+		<copy todir="${build.dir}/configuration" overwrite="true">
+			<fileset dir="${product.conf.dir}">
+				<include name="config.ini" />
+			</fileset>
+			<filterset>
+				<filter token="BUILD_VERSION" value="${build.version}" />
+				<filter token="RELEASE_CANDIDATE" value="${release.candidate}" />
+				<filter token="BUILD_DATE" value="${client.build.date}" />
+				<filter token="BUILD_TIME" value="${client.build.time}" />
+				<filter token="BUILD_NUMBER" value="${client.build.number}" />
+			</filterset>
+		</copy>
+
+		<copy tofile="${build.dir}/.eclipseproduct" overwrite="true">
+			<fileset dir="${product.conf.dir}">
+				<include name="_eclipseproduct" />
+			</fileset>
+			<filterset>
+				<filter token="BUILD_VERSION" value="${build.version}" />
+				<filter token="RELEASE_CANDIDATE" value="${release.candidate}" />
+				<filter token="BUILD_DATE" value="${client.build.date}" />
+				<filter token="BUILD_TIME" value="${client.build.time}" />
+				<filter token="BUILD_NUMBER" value="${client.build.number}" />
+			</filterset>
+		</copy>
+		<copy todir="${build.dir}" overwrite="true">
+			<fileset dir="${product.conf.dir}">
+				<include name="sls.exe" />
+			</fileset>
+		</copy>
+
+		<copy todir="${workspace}/com.weiglewilczek.xwt.launcher" overwrite="true">
+			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher/etc.temp">
+				<include name="plugin.xml" />
+			</fileset>
+		</copy>
+		<delete dir="${workspace}/com.weiglewilczek.xwt.launcher/etc.temp" />
+	</target>
+
+	<!-- =================================
+          target: package.releng.results
+         ================================= -->
+	<target name="package.releng.results" depends="run.releng.build" description="Packages the client.">
+		<echo>PACKAGE.RELENG.RESULTS</echo>
+
+		<jar destfile="${distribute.dir}/${productName}">
+			<fileset dir="${build.dir}">
+				<include name="**/*" />
+			</fileset>
+		</jar>
+	</target>
+
+	
+	<!-- ================================= 
+         target: clean              
+    	 ================================= -->
+	<target name="clean" description="Cleans the project for building.">
+		<echo>CLEAN</echo>
+		
+		<delete dir="${build.dir}" failonerror="false"/>
+		
+		<delete failonerror="false">
+			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher">
+			    <include name="*.jar"/>
+			</fileset>
+		</delete>
+		<delete dir="${workspace}/com.weiglewilczek.xwt.launcher/@dot" />
+		
+		<delete failonerror="false">
+			<fileset dir="${workspace}/com.weiglewilczek.utils">
+			    <include name="*.jar"/>
+			</fileset>
+		</delete>
+		<delete dir="${workspace}/com.weiglewilczek.utils/@dot" />
+		
+		<delete failonerror="false">
+			<fileset dir="${workspace}/com.weiglewilczek.eclipse.utils.ui">
+			    <include name="*.jar"/>
+			</fileset>
+		</delete>
+		<delete dir="${workspace}/com.weiglewilczek.eclipse.utils.ui/@dot" />
+		
+		<delete failonerror="false">
+			<fileset dir="${workspace}/com.weiglewilczek.eclipse.utils.ui.carbon">
+			    <include name="*.jar"/>
+			</fileset>
+		</delete>
+		<delete dir="${workspace}/com.weiglewilczek.eclipse.utils.ui.carbon/@dot" />
+		
+		<delete failonerror="false">
+			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher.feature">
+			    <include name="*.jar"/>
+			</fileset>
+		</delete>
+		
+		<delete failonerror="false">
+			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher.eclipse.feature">
+			    <include name="*.jar"/>
+			</fileset>
+		</delete>
+	</target>
+
+</project>

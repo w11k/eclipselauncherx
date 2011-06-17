@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="xwt">
+<locations>
+<location path="${workspace_loc}/com.weiglewilczek.xwt.launcher.target/rcp_3.6.0.v20100519" type="Directory"/>
+</locations>
+</target>

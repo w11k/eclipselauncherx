@@ -1,0 +1,7 @@
+# EclipseLauncherX 1.0.0 RC1 (17.06.2011 / 11:53:23)
+
+#Eclipse Product File
+#Wed Mar 05 15:19:52 CET 2008
+version=1.0.0
+name=EclipseLauncherX
+id=com.weiglewilczek.xwt.launcher

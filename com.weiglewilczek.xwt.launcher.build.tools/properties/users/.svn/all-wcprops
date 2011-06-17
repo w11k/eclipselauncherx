@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/lhs.sls/!svn/ver/217/trunk/sls.build.tools/properties/users
+END
+dblank.properties
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/lhs.sls/!svn/ver/233/trunk/sls.build.tools/properties/users/dblank.properties
+END
+hudson.properties
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/lhs.sls/!svn/ver/201/trunk/sls.build.tools/properties/users/hudson.properties
+END
+u10v041.properties
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/lhs.sls/!svn/ver/201/trunk/sls.build.tools/properties/users/u10v041.properties
+END
+thurow.properties
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/lhs.sls/!svn/ver/201/trunk/sls.build.tools/properties/users/thurow.properties
+END
+tomcat55.properties
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/lhs.sls/!svn/ver/201/trunk/sls.build.tools/properties/users/tomcat55.properties
+END
+daniela.properties
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/lhs.sls/!svn/ver/217/trunk/sls.build.tools/properties/users/daniela.properties
+END
+root.properties
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/lhs.sls/!svn/ver/201/trunk/sls.build.tools/properties/users/root.properties
+END

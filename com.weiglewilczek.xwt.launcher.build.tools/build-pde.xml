@@ -1,0 +1,77 @@
+    <!--
+        This program and the accompanying materials are made available
+        under the terms of the Eclipse Public License v1.0 which
+         accompanies this distribution, and is available at
+          http://www.eclipse.org/legal/epl-v10.html     
+    -->
+    <project name="EclipseLauncherX-Client-Build" default="pde-build" basedir=".">
+    	<property file="../xwt.launcher.build.tools/properties/build.properties" />
+    	<property file="../xwt.launcher.build.tools/properties/users/${user.name}.properties" />
+        <property file="build.properties" />
+    	
+    	<target name="clean">
+            <delete dir="${buildDirectory}" failonerror="false"/>
+        </target>
+
+        <!--
+            PDE Build expects that the build directory contains a "plugins"
+            directory and a "features" directory. These directories should contain
+            the various plug-ins and features to be built.
+           
+            This simply copies the projects directly from the workspace
+            into the appropriate build directory folders.
+            
+            In the project required plug-ins and features not available in the SDK are 
+			copied from the targetLocation to the build directory.
+        -->
+        <target name="init" depends="clean">
+            <mkdir dir="${buildDirectory}" />
+            <mkdir dir="${buildDirectory}/plugins" />
+            <mkdir dir="${buildDirectory}/features" />
+            <copy todir="${buildDirectory}/plugins">
+                <fileset dir="${target.dir}/plugins">
+                    <exclude name="*.source*/**" />              	                   
+                    <exclude name="*.win32*/**" />              	                   
+                </fileset>
+                <fileset dir="${workspace}">
+                    <include name="com.weiglewilczek.xwt.launcher/**" />
+                    <include name="com.weiglewilczek.utils/**" />
+                    <include name="com.weiglewilczek.eclipse.utils.*/**" />
+                    <include name="com.weiglewilczek.eclipse.utils.ui.carbon/**" />
+                </fileset>
+            </copy>
+            <copy todir="${buildDirectory}/features">
+                <fileset dir="${workspace}">
+                    <include name="com.weiglewilczek.xwt.launcher.feature/**" />
+                    <include name="com.weiglewilczek.xwt.launcher.eclipse.feature/**" />
+                </fileset>
+            	<fileset dir="${target.dir}/features">
+                       <exclude name="*.source*/**" />                                  
+                </fileset>
+            </copy>
+        </target>
+
+        <!--
+            This target actually executes the PDE Build process by launching the
+            Eclipse antRunner application.
+            
+            Properties for this build must be defined in a build.properties file positioned in the same directory as this build file
+            Properties used in the build.properties file or overriding properties can be added as another argument for the java call
+            Be carefull with the property key!
+        -->
+        <target name="pde-build" depends="init">
+            <echo message="EXECUTING LAUNCHER"/>
+            <java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
+                <arg value="-application" />
+                <arg value="org.eclipse.ant.core.antRunner" />
+                <arg value="-buildfile" />
+                <arg value="${eclipseLocation}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/productBuild/productBuild.xml" />
+                <arg value="-Dtimestamp=${timestamp}" />
+                <arg value="-Dworkspace=${basedir}/.." />
+                <classpath>
+                	<pathelement location="${eclipseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+                </classpath>
+            </java>
+        </target>
+    </project>
+

@@ -1,0 +1,16 @@
+# SLS @BUILD_VERSION@ @RELEASE_CANDIDATE@ (@BUILD_DATE@ / @BUILD_TIME@)
+
+-os
+win32
+-ws
+win32
+-arch
+x86
+-nl
+de_DE
+-clean
+-consoleLog
+-vmargs
+-Djava.security.auth.login.config="http://@SLS_SERVER@:@SLS_WEBPORT@/sls-webstart/login.conf"
+-Dsls.server=@SLS_SERVER@:@SLS_JNPPORT@
+-Dina.server=@INA_SERVER@:@INA_JNPPORT@

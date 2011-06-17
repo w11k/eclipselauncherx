@@ -1,0 +1,7 @@
+# SLS @BUILD_VERSION@ @RELEASE_CANDIDATE@ (@BUILD_DATE@ / @BUILD_TIME@)
+
+#Eclipse Product File
+#Wed Mar 05 15:19:52 CET 2008
+version=1.0.0
+name=SLS NG
+id=de.lhs.sls.client.ui.product

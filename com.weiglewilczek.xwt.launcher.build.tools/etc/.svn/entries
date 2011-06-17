@@ -1,0 +1,37 @@
+10
+
+dir
+232
+https://repository.weiglewilczek.com/lhs.sls/trunk/sls.build.tools/etc
+https://repository.weiglewilczek.com/lhs.sls
+
+
+
+2009-11-25T15:57:51.290310Z
+208
+athurow
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+e987a46c-5363-11de-9b1a-07e6d45a447f
+
+jboss-config
+dir
+
+product-config
+dir
+
+webstart-config
+dir
+

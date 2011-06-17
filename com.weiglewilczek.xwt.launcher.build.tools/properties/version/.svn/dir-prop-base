@@ -1,0 +1,9 @@
+K 10
+svn:ignore
+V 102
+buildnumber.client.properties
+buildnumber.server.properties
+sls.version.properties
+version.properties
+
+END

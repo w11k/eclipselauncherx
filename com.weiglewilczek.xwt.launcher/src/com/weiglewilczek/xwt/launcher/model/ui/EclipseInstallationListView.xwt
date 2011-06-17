@@ -1,0 +1,24 @@
+<Composite xmlns="http://www.eclipse.org/xwt/presentation"
+	xmlns:x="http://www.eclipse.org/xwt"
+	xmlns:y="clr-namespace:com.weiglewilczek.xwt.launcher.model.ui"
+	xmlns:j="clr-namespace:java.lang"
+	x:Class="com.weiglewilczek.xwt.launcher.workspacelist.EclipseInstallationListView">
+	<Composite.layout>
+		<GridLayout numColumns="1" />
+	</Composite.layout>
+	<TableViewer width="600" height="400" input="{Binding path=eclipseInstallations}" name="eclipseInstallationsList">
+		<TableViewer.control.layoutdata>
+			<GridData horizontalAlignment="FILL"
+				grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true"
+				verticalAlignment="FILL"></GridData>
+		</TableViewer.control.layoutdata>
+		<TableViewer.columns>
+			<TableViewerColumn text="Eclipse" width="200" property="name"/>
+			<TableViewerColumn text="Path" width="400" property="pathToExecutable"/>
+		</TableViewer.columns>
+		<TableViewer.table headerVisible="true"/>
+		<TableViewer.labelProvider>
+			<y:NumericLabelProvider/>
+		</TableViewer.labelProvider>
+	</TableViewer>
+</Composite>

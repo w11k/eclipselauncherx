@@ -1,0 +1,74 @@
+package com.weiglewilczek.xwt.launcher.model.ui;
+
+import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.swt.graphics.Image;
+
+import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
+import com.weiglewilczek.xwt.launcher.model.Installation;
+import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
+
+public class NumericLabelProvider implements ITableLabelProvider {
+
+	@Override
+	public void addListener(ILabelProviderListener listener) {
+	}
+
+	@Override
+	public void dispose() {
+	}
+
+	@Override
+	public boolean isLabelProperty(Object element, String property) {
+		return false;
+	}
+
+	@Override
+	public void removeListener(ILabelProviderListener listener) {
+	}
+
+	@Override
+	public Image getColumnImage(Object element, int columnIndex) {
+		return null;
+	}
+
+	@Override
+	public String getColumnText(Object element, int columnIndex) {
+		if (element instanceof LaunchConfiguration) {
+			LaunchConfiguration launchConfiguration = (LaunchConfiguration) element;
+			switch (columnIndex) {
+			case 0:
+				return launchConfiguration.getName();
+			case 1:
+				return launchConfiguration.getWorkspacePath();
+			case 2:
+				if (launchConfiguration.getEclipse() != null)
+					return launchConfiguration.getEclipse().getName();
+				break;
+			case 3:
+				if (launchConfiguration.getJava() != null)
+					return launchConfiguration.getJava().getName();
+				break;
+			case 4:
+				return launchConfiguration.getVmArgs();
+
+			default:
+				break;
+			}
+		}
+		else if (element instanceof Installation<?>) {
+			Installation installation = (Installation) element;
+			switch (columnIndex) {
+			case 0:
+				return installation.getName();
+			case 1:
+				return installation.getPathToExecutable();
+				
+			default:
+				break;
+			}
+		}
+		return null;
+	}
+
+}

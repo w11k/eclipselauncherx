@@ -1,0 +1,55 @@
+###########################
+### JBoss configuration ###
+###########################
+jboss.dir				= C:/dev/_SLS_HEAD_/jboss-4.0.3SP1
+jboss.server.config		= sls_playground
+
+
+#############################
+### Install configuration ###
+#############################
+install.to.dir			= C:/dev/_SLS_HEAD_
+jboss.version			= jboss-4.0.3SP1
+jboss.filename			= ${jboss.version}.zip
+tomcat.version			= 55
+jboss.config.files		= ${basedir}/etc/jboss-config/${jboss.version}
+install.temp			= ${basedir}/install.temp
+
+
+############################
+### Server configuration ###
+############################
+ina.admin.username			= adminsys
+ina.admin.password			= ina
+
+
+####################
+### Server ports ###
+####################
+sls.server.name			= localhost
+sls.server.webport		= 3080
+sls.server.jnpport		= 6099
+ina.server.name			= ina
+ina.server.webport		= 8099
+ina.server.jnpport		= 4099
+
+
+#############################
+### Postgres configuration ##
+#############################
+sls.postgres.user		= sls
+sls.postgres.password	= sls
+sls.postgres.server		= localhost:5432
+sls.postgres.schema		= sls
+
+
+################################
+### Mail Server configuration ##
+################################
+smtp.server = mail.weiglewilczek.com
+mail.from = thurow@weiglewilczek.com
+mail.to.vorschlag.bearbeiter = thurow@weiglewilczek.com
+
+#smtp.server = mail0x.haupta.stadt-stuttgart.de
+#mail.from = Poststelle.SLSNG@stuttgart.de
+#mail.to.vorschlag.bearbeiter = U10E025@stuttgart.de,u10e027@stuttgart.de,U106705@stuttgart.de,u10b019@stuttgart.de

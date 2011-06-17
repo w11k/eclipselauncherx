@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Export-Package: com.weiglewilczek.ejbutil,com.weiglewilczek.helpers,co
+ m.weiglewilczek.utils,com.weiglewilczek.utils.aggregate,javax.ejb,jav
+ ax.ejb.spi,javax.sql,org.apache.commons.logging,org.apache.commons.lo
+ gging.impl,org.apache.log4j,org.apache.log4j.chainsaw,org.apache.log4
+ j.config,org.apache.log4j.helpers,org.apache.log4j.jdbc,org.apache.lo
+ g4j.jmx,org.apache.log4j.lf5,org.apache.log4j.lf5.config,org.apache.l
+ og4j.lf5.util,org.apache.log4j.lf5.viewer,org.apache.log4j.lf5.viewer
+ .categoryexplorer,org.apache.log4j.lf5.viewer.configure,org.apache.lo
+ g4j.lf5.viewer.images,org.apache.log4j.net,org.apache.log4j.nt,org.ap
+ ache.log4j.or,org.apache.log4j.or.jms,org.apache.log4j.or.sax,org.apa
+ che.log4j.spi,org.apache.log4j.varia,org.apache.log4j.xml
+Bundle-ClassPath: utils.jar,lib/adt.jar,lib/configuration.jar,lib/ejb.
+ jar,lib/jdbc2_0-stdext.jar,lib/jface.jar,lib/log4j-1.2.8.jar,lib/swt.
+ jar,lib/commons-logging.jar
+Bundle-Version: 1.0.0
+Bundle-Name: Utils
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: com.weiglewilczek.utils
+
+

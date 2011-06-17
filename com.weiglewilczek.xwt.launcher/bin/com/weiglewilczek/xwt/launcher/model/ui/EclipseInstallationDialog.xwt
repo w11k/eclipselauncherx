@@ -1,0 +1,24 @@
+<Composite xmlns="http://www.eclipse.org/xwt/presentation"
+	xmlns:x="http://www.eclipse.org/xwt" xmlns:c="clr-namespace:com.weiglewilczek.eclipse.launcher.model.ui"
+	xmlns:j="clr-namespace:java.lang"
+	x:Class="com.weiglewilczek.xwt.launcher.model.ui.EclipseInstallationDialog">
+	<Composite.layout>
+		<GridLayout numColumns="3" />
+	</Composite.layout>
+	<Label text="Name:" alignment="RIGHT" />
+	<Text x:Style="Border" text="{Binding path=name, updateSourceTrigger=PropertyChanged}">
+		<Text.layoutData>
+			<GridData grabExcessHorizontalSpace="true"
+				horizontalAlignment="GridData.FILL" widthHint="300" horizontalSpan="2" />
+		</Text.layoutData>
+	</Text>
+	<Label text="Path to executable:" />
+	<Text x:Style="Border" text="{Binding path=pathToExecutable, updateSourceTrigger=PropertyChanged}" name="path">
+		<Text.layoutData>
+			<GridData grabExcessHorizontalSpace="true"
+				horizontalAlignment="GridData.FILL" widthHint="250" />
+		</Text.layoutData>
+	</Text>
+	<Button x:Style="Border" text="..." SelectionEvent="performSelectionEvent">
+	</Button>
+</Composite>
