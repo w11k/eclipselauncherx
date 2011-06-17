@@ -3,8 +3,13 @@ Die in EclipseLauncherX eingegebenen Konfigurationen werde gespeichert in:
 EclipseLauncherX.app/Contents/MacOS/workspace/.metadata/plugins/org.eclipse.core.runtime/.settings/com.weiglewilczek.xwt.launcher.prefs
 Bei einem Update auf eine andere Programmversion, bitte diese Datei (bzw. dern Ordner org.eclipse.core.runtime) manuell in das neue Programm kopieren.
 
+Known Bug:
+Vor dem Start muss dem Owner noch Execution-Rechte für die Datei EclipseLauncherX.app/Contents/MacOS/EclipseLauncherX hinzugefügt werden.
+Also:
+chmod o+x ....EclipseLauncherX.app/Contents/MacOS/EclipseLauncherX 
+
 Release Notes:
 
 RC2:
 - Das Workspace-Verzeichnis wird im Window-Title angezeigt
-- Behoben: Die Eingabe von vmargs f�hrt dazu, dass Eclipse nicht gestartet werden kann
+- Behoben: Die Eingabe von vmargs führt dazu, dass Eclipse nicht gestartet werden kann
