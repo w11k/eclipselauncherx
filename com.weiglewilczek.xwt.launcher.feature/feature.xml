@@ -2,7 +2,7 @@
 <feature
       id="com.weiglewilczek.xwt.launcher.feature"
       label="Feature"
-      version="1.0.0"
+      version="1.0.0.RC3"
       provider-name="WEIGLEWILCZEK">
 
    <description url="http://www.example.com/description">

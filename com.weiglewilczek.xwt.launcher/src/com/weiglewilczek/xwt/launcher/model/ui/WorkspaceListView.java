@@ -5,18 +5,22 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.runtime.internal.adaptor.EclipseCommandProvider;
 import org.eclipse.e4.xwt.DefaultLoadingContext;
 import org.eclipse.e4.xwt.XWT;
 import org.eclipse.e4.xwt.XWTLoader;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.part.ViewPart;
 
+import com.weiglewilczek.eclipse.utils.ui.jface.viewers.AbstractColumnViewerSorter;
 import com.weiglewilczek.xwt.launcher.listener.IListener;
 import com.weiglewilczek.xwt.launcher.listener.ListenerType;
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
@@ -56,6 +60,8 @@ public class WorkspaceListView extends ViewPart implements IListener {
 					.getResource("WorkspaceList.xwt"), newOptions);
 			area.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			Object table = XWT.findElementByName(area, "workspaceList");
+			Object configurationColumn = XWT.findElementByName(area,
+					"configurationColumn");
 			if (table != null && table instanceof TableViewer) {
 				workspaceList = (TableViewer) table;
 				getSite().setSelectionProvider(workspaceList);
@@ -65,16 +71,37 @@ public class WorkspaceListView extends ViewPart implements IListener {
 
 							@Override
 							public void doubleClick(DoubleClickEvent event) {
-								IHandlerService hs
-								  = (IHandlerService) getSite().getService(IHandlerService.class);
+								IHandlerService hs = (IHandlerService) getSite()
+										.getService(IHandlerService.class);
 								try {
-									hs.executeCommand("com.weiglewilczek.xwt.launcher.commands.Edit", null);
+									hs.executeCommand(
+											"com.weiglewilczek.xwt.launcher.commands.Launch",
+											null);
 								} catch (Exception e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
 							}
 						});
+
+				if (configurationColumn instanceof TableViewerColumn)
+				{
+					AbstractColumnViewerSorter<LaunchConfiguration> sorter = new AbstractColumnViewerSorter<LaunchConfiguration>(
+							workspaceList,
+							(TableViewerColumn) configurationColumn) {
+
+						@Override
+						public int doCompare(
+								LaunchConfiguration launchConfiguration1,
+								LaunchConfiguration launchConfiguration2) {
+							return launchConfiguration1.getName()
+									.compareTo(
+											launchConfiguration2
+													.getName());
+						}
+					};
+					sorter.setSorter(sorter, AbstractColumnViewerSorter.ASC);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -116,34 +143,30 @@ public class WorkspaceListView extends ViewPart implements IListener {
 			default:
 				break;
 			}
-		}
-		else if(object instanceof EclipseInstallation && type.equals(ListenerType.UPDATE))
-		{
-			
+		} else if (object instanceof EclipseInstallation
+				&& type.equals(ListenerType.UPDATE)) {
+
 			EclipseInstallation eclipse = (EclipseInstallation) object;
-			
+
 			for (Object writableObject : dataContext.getLaunchConfigurations()) {
-				LaunchConfiguration launchConfiguration = (LaunchConfiguration)writableObject;
-				if(launchConfiguration.getEclipse().equals(eclipse))
-				{
+				LaunchConfiguration launchConfiguration = (LaunchConfiguration) writableObject;
+				if (launchConfiguration.getEclipse().equals(eclipse)) {
 					launchConfiguration.setEclipse(eclipse);
 				}
 			}
-			
+
 			workspaceList.refresh(true);
-		}
-		else if(object instanceof JavaInstallation && type.equals(ListenerType.UPDATE))
-		{
+		} else if (object instanceof JavaInstallation
+				&& type.equals(ListenerType.UPDATE)) {
 			JavaInstallation java = (JavaInstallation) object;
-			
+
 			for (Object writableObject : dataContext.getLaunchConfigurations()) {
-				LaunchConfiguration launchConfiguration = (LaunchConfiguration)writableObject;
-				if(launchConfiguration.getJava().equals(java))
-				{
+				LaunchConfiguration launchConfiguration = (LaunchConfiguration) writableObject;
+				if (launchConfiguration.getJava().equals(java)) {
 					launchConfiguration.setJava(java);
 				}
 			}
-			
+
 			workspaceList.refresh(true);
 		}
 	}

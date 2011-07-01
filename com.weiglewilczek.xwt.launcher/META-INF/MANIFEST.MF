@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EclipseLauncherX
 Bundle-SymbolicName: com.weiglewilczek.xwt.launcher; singleton:=true
-Bundle-Version: 1.0.0.RC1
+Bundle-Version: 1.0.0.RC3
 Bundle-Activator: com.weiglewilczek.xwt.launcher.Activator
 Bundle-Vendor: WEIGLEWILCZEK
 Require-Bundle: org.eclipse.ui,

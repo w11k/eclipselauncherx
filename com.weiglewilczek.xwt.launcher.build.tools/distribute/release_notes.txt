@@ -10,6 +10,10 @@ chmod o+x ....EclipseLauncherX.app/Contents/MacOS/EclipseLauncherX
 
 Release Notes:
 
+RC3:
+- Per Doppelklick auf eine Workspace-Konfiguration wird diese gestartet (war: der Edit-Dialog wird angezeigt)
+- Sortierung nach Workspace-Konfiguration-Name in der View hinzugefügt
+
 RC2:
 - Das Workspace-Verzeichnis wird im Window-Title angezeigt
 - Behoben: Die Eingabe von vmargs führt dazu, dass Eclipse nicht gestartet werden kann

@@ -13,7 +13,7 @@
 				verticalAlignment="FILL"></GridData>
 		</TableViewer.control.layoutdata>
 		<TableViewer.columns>
-			<TableViewerColumn text="Configuration" width="100" property="name"/>
+			<TableViewerColumn text="Configuration" width="100" property="name" name="configurationColumn"/>
 			<TableViewerColumn text="Workspace" width="260" property="workspacePath"/>
 			<TableViewerColumn text="Eclipse" width="70" property="eclipse"/>
 			<TableViewerColumn text="Java VM" width="70" property="java"/>

@@ -1,6 +1,6 @@
-databinding on value changed: done
-build: done (terminaldatei ist nicht executable und muss immer ersetzt werden: ditto zum copy einer lauff�higen datei verwenden und nicht zippen sondern tar[.gz] verwenden -> siehe bridge)
-vmargs: eclipse startet nicht, wenn welche angegeben sind!
-
 TODO:
 Achtung: die org.eclipse.e4.xwt_0.9.1.v20100905.jar in /Applications/eclipse/eclipse3.6 ist die gepatchte aus dem Workspace, da der build anscheinend das Target bzw. aus dem workspace nicht anzieht
+
+Features:
+- Überstruktur "Projekte" für LaunchConfigs anlegen lassen (auf tree-Darstellung anpassen)
+- Menu über die Launchconfigs als Dockmenu anzeigen
