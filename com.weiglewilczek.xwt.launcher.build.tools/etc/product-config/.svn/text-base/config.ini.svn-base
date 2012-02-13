@@ -1,8 +1,0 @@
-# SLS @BUILD_VERSION@ @RELEASE_CANDIDATE@ (@BUILD_DATE@ / @BUILD_TIME@)
-
-#Product Runtime Configuration File
-
-osgi.splashPath=platform:/base/plugins/de.lhs.sls.client.ui
-eclipse.product=de.lhs.sls.client.ui.product
-osgi.bundles=org.eclipse.equinox.common@2:start,org.eclipse.update.configurator@3:start,org.eclipse.core.runtime@start
-osgi.bundles.defaultStartLevel=4
