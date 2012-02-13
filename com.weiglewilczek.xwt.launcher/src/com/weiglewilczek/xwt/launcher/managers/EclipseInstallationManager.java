@@ -2,13 +2,11 @@ package com.weiglewilczek.xwt.launcher.managers;
 
 import java.util.List;
 
-import org.osgi.service.prefs.BackingStoreException;
-
 import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 
 public class EclipseInstallationManager extends
-		BaseManager<EclipseInstallation> {
+		BaseManager<EclipseInstallation, EclipseInstallationFields> {
 
 	private static EclipseInstallationManager instance;
 
@@ -17,12 +15,12 @@ public class EclipseInstallationManager extends
 	}
 
 	public static final EclipseInstallationManager getInstance() {
-		if(instance == null)
+		if (instance == null)
 			instance = new EclipseInstallationManager();
-		
+
 		return instance;
 	}
-	
+
 	@Override
 	public List<EclipseInstallation> enumerateAll() {
 		return super.enumerateAll(EclipseInstallation.class);
@@ -50,14 +48,15 @@ public class EclipseInstallationManager extends
 
 	@Override
 	public void delete(EclipseInstallation object) throws Exception {
-		List<LaunchConfiguration> launchConfigurations = LaunchConfigurationManager.getInstance().enumerateAll();
+		List<LaunchConfiguration> launchConfigurations = LaunchConfigurationManager
+				.getInstance().enumerateAll();
 		for (LaunchConfiguration launchConfiguration : launchConfigurations) {
-			if(launchConfiguration.getEclipse().equals(object))
-			{
-				throw new Exception("The EclipseInstallation cannot be delete. It is referenced by min. a LaunchConfiguration.");
+			if (launchConfiguration.getEclipse().equals(object)) {
+				throw new Exception(
+						"The EclipseInstallation cannot be delete. It is referenced by min. a LaunchConfiguration.");
 			}
 		}
-		
+
 		super.delete(object);
 	}
 }

@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 
-public class LaunchConfigurationManager extends BaseManager<LaunchConfiguration> {
+public class LaunchConfigurationManager extends
+		BaseManager<LaunchConfiguration, LaunchConfigurationFields> {
 	private static LaunchConfigurationManager instance;
 
 	private LaunchConfigurationManager() {
@@ -12,9 +13,9 @@ public class LaunchConfigurationManager extends BaseManager<LaunchConfiguration>
 	}
 
 	public static final LaunchConfigurationManager getInstance() {
-		if(instance == null)
+		if (instance == null)
 			instance = new LaunchConfigurationManager();
-		
+
 		return instance;
 	}
 
@@ -24,7 +25,7 @@ public class LaunchConfigurationManager extends BaseManager<LaunchConfiguration>
 	}
 
 	@Override
-	protected  LaunchConfigurationFields[] getFields() {
+	protected LaunchConfigurationFields[] getFields() {
 		return LaunchConfigurationFields.values();
 	}
 

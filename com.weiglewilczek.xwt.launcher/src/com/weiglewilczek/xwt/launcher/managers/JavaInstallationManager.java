@@ -2,11 +2,11 @@ package com.weiglewilczek.xwt.launcher.managers;
 
 import java.util.List;
 
-import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 import com.weiglewilczek.xwt.launcher.model.JavaInstallation;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 
-public class JavaInstallationManager extends BaseManager<JavaInstallation> {
+public class JavaInstallationManager extends
+		BaseManager<JavaInstallation, JavaInstallationFields> {
 	private static JavaInstallationManager instance;
 
 	private JavaInstallationManager() {
@@ -14,12 +14,12 @@ public class JavaInstallationManager extends BaseManager<JavaInstallation> {
 	}
 
 	public static final JavaInstallationManager getInstance() {
-		if(instance == null)
+		if (instance == null)
 			instance = new JavaInstallationManager();
-		
+
 		return instance;
 	}
-	
+
 	@Override
 	public List<JavaInstallation> enumerateAll() {
 		return super.enumerateAll(JavaInstallation.class);
@@ -44,17 +44,18 @@ public class JavaInstallationManager extends BaseManager<JavaInstallation> {
 	protected JavaInstallation createModel() {
 		return new JavaInstallation();
 	}
-	
+
 	@Override
 	public void delete(JavaInstallation object) throws Exception {
-		List<LaunchConfiguration> launchConfigurations = LaunchConfigurationManager.getInstance().enumerateAll();
+		List<LaunchConfiguration> launchConfigurations = LaunchConfigurationManager
+				.getInstance().enumerateAll();
 		for (LaunchConfiguration launchConfiguration : launchConfigurations) {
-			if(launchConfiguration.getEclipse().equals(object))
-			{
-				throw new Exception("The JavaInstallation cannot be delete. It is referenced by min. a LaunchConfiguration.");
+			if (launchConfiguration.getEclipse().equals(object)) {
+				throw new Exception(
+						"The JavaInstallation cannot be delete. It is referenced by min. a LaunchConfiguration.");
 			}
 		}
-		
+
 		super.delete(object);
 	}
 }

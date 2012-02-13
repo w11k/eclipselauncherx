@@ -26,11 +26,12 @@ public abstract class ModelElement<T extends BaseFields<T>> {
 			return getClass().hashCode();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
 		if (obj != null && obj instanceof ModelElement) {
-			if (((ModelElement) obj).getId() != null
-					&& ((ModelElement) obj).getId().equals(getId())) {
+			if (((ModelElement<T>) obj).getId() != null
+					&& ((ModelElement<T>) obj).getId().equals(getId())) {
 				return true;
 			}
 		}

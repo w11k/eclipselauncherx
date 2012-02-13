@@ -13,9 +13,10 @@ import com.weiglewilczek.xwt.launcher.listener.IListener;
 import com.weiglewilczek.xwt.launcher.listener.ListenerType;
 import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 import com.weiglewilczek.xwt.launcher.model.JavaInstallation;
+import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 import com.weiglewilczek.xwt.launcher.model.ModelElement;
 
-public abstract class BaseManager<T extends ModelElement> {
+public abstract class BaseManager<T extends ModelElement<F>, F extends BaseFields<F>> {
 
 	// prefs are stored in
 	// .metadata/.plugins/org.eclipse.core.runtime/.settings/com.weiglewilczek.eclipse.launcher.prefs
@@ -100,7 +101,7 @@ public abstract class BaseManager<T extends ModelElement> {
 				return;
 			}
 
-			for (BaseFields<T> field : getFields()) {
+			for (BaseFields<?> field : getFields()) {
 				removeEntry(id + field.getName());
 			}
 
@@ -122,9 +123,9 @@ public abstract class BaseManager<T extends ModelElement> {
 					&& (ids.equals(id.toString())
 							|| ids.startsWith(id.toString() + ",")
 							|| ids.indexOf("," + id.toString() + ",") > -1 || ids
-							.endsWith("," + id.toString()))) {
+								.endsWith("," + id.toString()))) {
 
-				for (BaseFields<T> field : getFields()) {
+				for (F field : getFields()) {
 					if (field.getTypeInstance().getClass().equals(String.class)) {
 						String value = store.getString(id.toString()
 								+ field.getName());
@@ -152,12 +153,29 @@ public abstract class BaseManager<T extends ModelElement> {
 									EclipseInstallationManager.getInstance()
 											.get(value));
 						}
+					} else if (field.getTypeInstance().getClass()
+							.equals(LaunchConfiguration[].class)) {
+						if (store.contains(id.toString() + field.getName())) {
+							String value = store.getString(id.toString()
+									+ field.getName());
+							String[] values = value.split(",");
+
+							List<LaunchConfiguration> configurations = new ArrayList<LaunchConfiguration>();
+							for (String configurationId : values) {
+								LaunchConfiguration configuration = LaunchConfigurationManager
+										.getInstance().get(
+												new Long(configurationId));
+								configurations.add(configuration);
+							}
+
+							object.setProperty(field, configurations);
+						}
 					} else
 						System.out.println("warn: unknown type: "
 								+ field.getTypeInstance().getClass());
 				}
 
-				return (T) object;
+				return object;
 			}
 
 			return null;
@@ -184,7 +202,7 @@ public abstract class BaseManager<T extends ModelElement> {
 
 	public abstract List<T> enumerateAll();
 
-	protected abstract <P extends BaseFields<T>> P[] getFields();
+	protected abstract F[] getFields();
 
 	protected abstract PreferenceFields getNextIdField();
 
@@ -192,10 +210,11 @@ public abstract class BaseManager<T extends ModelElement> {
 
 	protected abstract T createModel();
 
+	@SuppressWarnings("unchecked")
 	private void setFields(T object) {
 		Long id = object.getId();
 
-		for (BaseFields<T> field : getFields()) {
+		for (F field : getFields()) {
 			Object value = object.getProperty(field);
 			if (value != null) {
 				if (value instanceof String)
@@ -205,10 +224,28 @@ public abstract class BaseManager<T extends ModelElement> {
 							((Long) value).longValue());
 				else if (value instanceof ModelElement)
 					store.setValue(id + field.getName(),
-							((ModelElement) value).getId());
-				else
+							((ModelElement<?>) value).getId());
+				else if (field.getTypeInstance().getClass()
+						.equals(LaunchConfiguration[].class)) {
+					List<LaunchConfiguration> configurations = (List<LaunchConfiguration>) value;
+					if (configurations.size() > 0) {
+						String configurationIds = "";
+						for (LaunchConfiguration configuration : (List<LaunchConfiguration>) value) {
+							configurationIds = configurationIds
+									+ configuration.getId() + ",";
+						}
+						configurationIds.substring(0,
+								configurationIds.length() - 1);
+
+						store.setValue(id + field.getName(), configurationIds);
+					} else {
+						removeEntry(id + field.getName());
+					}
+				} else
 					System.out.println("warn: unknown type: "
 							+ value.getClass());
+			} else {
+				removeEntry(id + field.getName());
 			}
 		}
 	}
@@ -256,7 +293,7 @@ public abstract class BaseManager<T extends ModelElement> {
 		}
 	}
 
-	private void handleCreated(T object) {
+	protected void handleCreated(T object) {
 		synchronized (listenerList) {
 			for (IListener listener : listenerList) {
 				listener.handle(ListenerType.CREATE, object);
@@ -264,7 +301,7 @@ public abstract class BaseManager<T extends ModelElement> {
 		}
 	}
 
-	private void handleUpdated(T object) {
+	protected void handleUpdated(T object) {
 		synchronized (listenerList) {
 			for (IListener listener : listenerList) {
 				listener.handle(ListenerType.UPDATE, object);
@@ -272,7 +309,7 @@ public abstract class BaseManager<T extends ModelElement> {
 		}
 	}
 
-	private void handleDeleted(T object) {
+	protected void handleDeleted(T object) {
 		synchronized (listenerList) {
 			for (IListener listener : listenerList) {
 				listener.handle(ListenerType.DELETE, object);
