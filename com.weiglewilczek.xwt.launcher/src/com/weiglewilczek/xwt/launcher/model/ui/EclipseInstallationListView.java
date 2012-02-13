@@ -1,6 +1,5 @@
 package com.weiglewilczek.xwt.launcher.model.ui;
 
-import org.eclipse.core.commands.Command;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.e4.xwt.XWT;
 import org.eclipse.e4.xwt.pde.ui.views.XWTViewPart;
@@ -8,17 +7,13 @@ import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.IHandlerService;
-import org.eclipse.ui.internal.commands.CommandService;
 
 import com.weiglewilczek.xwt.launcher.listener.IListener;
 import com.weiglewilczek.xwt.launcher.listener.ListenerType;
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
-import com.weiglewilczek.xwt.launcher.managers.LaunchConfigurationManager;
 import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 import com.weiglewilczek.xwt.launcher.model.EclipseInstallationsListDataContext;
-import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 import com.weiglewilczek.xwt.launcher.model.ModelElement;
 
 public class EclipseInstallationListView extends XWTViewPart implements
@@ -31,11 +26,10 @@ public class EclipseInstallationListView extends XWTViewPart implements
 	public EclipseInstallationListView() {
 		EclipseInstallationManager.getInstance().addListener(this);
 
-		context = new EclipseInstallationsListDataContext();
 		WritableList eclipseInstallations = new WritableList();
 		eclipseInstallations.addAll(EclipseInstallationManager.getInstance()
 				.enumerateAll());
-		context.setEclipseInstallations(eclipseInstallations);
+		context = new EclipseInstallationsListDataContext(eclipseInstallations);
 		setDataContext(context);
 	}
 
@@ -57,10 +51,12 @@ public class EclipseInstallationListView extends XWTViewPart implements
 
 							@Override
 							public void doubleClick(DoubleClickEvent event) {
-								IHandlerService hs
-								  = (IHandlerService) getSite().getService(IHandlerService.class);
+								IHandlerService hs = (IHandlerService) getSite()
+										.getService(IHandlerService.class);
 								try {
-									hs.executeCommand("com.weiglewilczek.xwt.launcher.commands.Edit", null);
+									hs.executeCommand(
+											"com.weiglewilczek.xwt.launcher.commands.Edit",
+											null);
 								} catch (Exception e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
@@ -80,7 +76,7 @@ public class EclipseInstallationListView extends XWTViewPart implements
 	}
 
 	@Override
-	public void handle(ListenerType type, ModelElement object) {
+	public void handle(ListenerType type, ModelElement<?> object) {
 		if (object instanceof EclipseInstallation) {
 			switch (type) {
 			case CREATE:

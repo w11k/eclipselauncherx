@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.core.runtime.internal.adaptor.EclipseCommandProvider;
 import org.eclipse.e4.xwt.DefaultLoadingContext;
 import org.eclipse.e4.xwt.XWT;
 import org.eclipse.e4.xwt.XWTLoader;
@@ -13,7 +12,6 @@ import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -84,8 +82,7 @@ public class WorkspaceListView extends ViewPart implements IListener {
 							}
 						});
 
-				if (configurationColumn instanceof TableViewerColumn)
-				{
+				if (configurationColumn instanceof TableViewerColumn) {
 					AbstractColumnViewerSorter<LaunchConfiguration> sorter = new AbstractColumnViewerSorter<LaunchConfiguration>(
 							workspaceList,
 							(TableViewerColumn) configurationColumn) {
@@ -94,10 +91,8 @@ public class WorkspaceListView extends ViewPart implements IListener {
 						public int doCompare(
 								LaunchConfiguration launchConfiguration1,
 								LaunchConfiguration launchConfiguration2) {
-							return launchConfiguration1.getName()
-									.compareTo(
-											launchConfiguration2
-													.getName());
+							return launchConfiguration1.getName().compareTo(
+									launchConfiguration2.getName());
 						}
 					};
 					sorter.setSorter(sorter, AbstractColumnViewerSorter.ASC);
@@ -125,7 +120,7 @@ public class WorkspaceListView extends ViewPart implements IListener {
 	}
 
 	@Override
-	public void handle(ListenerType type, ModelElement object) {
+	public void handle(ListenerType type, ModelElement<?> object) {
 		if (object instanceof LaunchConfiguration) {
 			switch (type) {
 			case CREATE:
