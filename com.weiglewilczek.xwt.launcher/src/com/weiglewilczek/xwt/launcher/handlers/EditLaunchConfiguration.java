@@ -23,7 +23,6 @@ public class EditLaunchConfiguration extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		LaunchConfigurationDataContext dataContext = new LaunchConfigurationDataContext();
 
 		Object currentSelection = HandlerUtil.getCurrentSelection(event);
 		if (currentSelection != null
@@ -33,19 +32,17 @@ public class EditLaunchConfiguration extends AbstractHandler {
 			if (selection.getFirstElement() != null && selection.getFirstElement() instanceof LaunchConfiguration) {
 				LaunchConfiguration configuration = (LaunchConfiguration)selection.getFirstElement();
 				
-				dataContext.setLaunchConfiguration(configuration);
-
 				List<EclipseInstallation> eclipses = EclipseInstallationManager
 						.getInstance().enumerateAll();
 				WritableList writableEclipses = new WritableList();
 				writableEclipses.addAll(eclipses);
-				dataContext.setEclipseInstallations(writableEclipses);
 
 				List<JavaInstallation> javas = JavaInstallationManager
 						.getInstance().enumerateAll();
 				WritableList writableJavas = new WritableList();
 				writableJavas.addAll(javas);
-				dataContext.setJavaInstallations(writableJavas);
+				
+				LaunchConfigurationDataContext dataContext = new LaunchConfigurationDataContext(configuration, writableEclipses, writableJavas);
 
 				LaunchConfigurationDialog launchConfiguration = new LaunchConfigurationDialog(
 						HandlerUtil.getActiveShell(event), dataContext);

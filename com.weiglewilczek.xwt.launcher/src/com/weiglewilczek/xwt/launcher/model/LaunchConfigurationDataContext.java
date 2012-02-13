@@ -9,39 +9,31 @@ import com.weiglewilczek.xwt.launcher.managers.JavaInstallationManager;
 
 public class LaunchConfigurationDataContext implements IListener {
 
-	private LaunchConfiguration launchConfiguration;
+	private final LaunchConfiguration launchConfiguration;
 
-	private WritableList javaInstallations;
+	private final WritableList javaInstallations;
 
-	private WritableList eclipseInstallations;
+	private final WritableList eclipseInstallations;
 
-	public LaunchConfigurationDataContext() {
+	public LaunchConfigurationDataContext(LaunchConfiguration launchConfiguration, WritableList eclipseInstallations, WritableList javaInstallations) {
 		JavaInstallationManager.getInstance().addListener(this);
 		EclipseInstallationManager.getInstance().addListener(this);
+		
+		this.launchConfiguration = launchConfiguration;
+		this.javaInstallations = javaInstallations;
+		this.eclipseInstallations = eclipseInstallations;
 	}
 
 	public LaunchConfiguration getLaunchConfiguration() {
 		return launchConfiguration;
 	}
 
-	public void setLaunchConfiguration(LaunchConfiguration launchConfiguration) {
-		this.launchConfiguration = launchConfiguration;
-	}
-
 	public WritableList getJavaInstallations() {
 		return javaInstallations;
 	}
 
-	public void setJavaInstallations(WritableList javaInstallations) {
-		this.javaInstallations = javaInstallations;
-	}
-
 	public WritableList getEclipseInstallations() {
 		return eclipseInstallations;
-	}
-
-	public void setEclipseInstallations(WritableList eclipseInstallations) {
-		this.eclipseInstallations = eclipseInstallations;
 	}
 
 	// a multi property path in xwt-File leads to stack overflow while
