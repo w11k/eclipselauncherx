@@ -1,6 +1,5 @@
 package com.weiglewilczek.xwt.launcher.model.ui;
 
-import java.awt.datatransfer.StringSelection;
 import java.net.URL;
 
 import org.eclipse.e4.xwt.XWT;
@@ -69,13 +68,15 @@ public class LaunchConfigurationDialog extends AbstractDialog {
 			eclipse = (ComboViewer) XWT.findElementByName(contextControl,
 					"eclipse");
 			java = (ComboViewer) XWT.findElementByName(contextControl, "java");
-			
+
 			if (eclipse != null && getDataContext().getEclipse() != null) {
-				eclipse.setSelection(new StructuredSelection(getDataContext().getEclipse()));
+				eclipse.setSelection(new StructuredSelection(getDataContext()
+						.getEclipse()));
 			}
-			
+
 			if (java != null && getDataContext().getJava() != null) {
-				java.setSelection(new StructuredSelection(getDataContext().getJava()));
+				java.setSelection(new StructuredSelection(getDataContext()
+						.getJava()));
 			}
 		}
 

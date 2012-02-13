@@ -5,7 +5,6 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.osgi.service.prefs.BackingStoreException;
 
 import com.weiglewilczek.xwt.launcher.managers.LaunchConfigurationManager;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
