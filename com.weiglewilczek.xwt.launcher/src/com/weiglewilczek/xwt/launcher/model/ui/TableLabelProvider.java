@@ -4,11 +4,11 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 import com.weiglewilczek.xwt.launcher.model.Installation;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
+import com.weiglewilczek.xwt.launcher.model.ObservableGroup;
 
-public class NumericLabelProvider implements ITableLabelProvider {
+public class TableLabelProvider implements ITableLabelProvider {
 
 	@Override
 	public void addListener(ILabelProviderListener listener) {
@@ -55,17 +55,25 @@ public class NumericLabelProvider implements ITableLabelProvider {
 			default:
 				break;
 			}
-		}
-		else if (element instanceof Installation<?>) {
-			Installation installation = (Installation) element;
+		} else if (element instanceof Installation<?>) {
+			Installation<?> installation = (Installation<?>) element;
 			switch (columnIndex) {
 			case 0:
 				return installation.getName();
 			case 1:
 				return installation.getPathToExecutable();
-				
+
 			default:
 				break;
+			}
+		} else if (element instanceof ObservableGroup) {
+			ObservableGroup group = (ObservableGroup) element;
+			switch (columnIndex) {
+			case 0:
+				return group.getGroup().getName();
+
+			default:
+				return "";
 			}
 		}
 		return null;

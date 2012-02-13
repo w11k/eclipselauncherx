@@ -6,15 +6,13 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-public class OpenLaunchConfigurationListView extends AbstractHandler {
+public class OpenGroupsView extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-//			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("com.weiglewilczek.xwt.launcher.views.LaunchConfigurations");
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("com.weiglewilczek.xwt.launcher.views.Groups");
 		} catch (PartInitException e) {
-//			throw new ExecutionException("Error opening launch configuration list view", e);
 			throw new ExecutionException("Error opening groups view", e);
 		}
 		return null;

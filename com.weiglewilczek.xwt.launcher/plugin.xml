@@ -43,6 +43,13 @@
             name="JavaInstallations"
             restorable="true">
       </view>
+      <view
+            allowMultiple="false"
+            class="com.weiglewilczek.xwt.launcher.model.ui.GroupsView"
+            id="com.weiglewilczek.xwt.launcher.views.Groups"
+            name="Groups"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -50,7 +57,7 @@
             targetID="*">
          <view
                closeable="false"
-               id="com.weiglewilczek.xwt.launcher.views.LaunchConfigurations"
+               id="com.weiglewilczek.xwt.launcher.views.Groups"
                minimized="false"
                moveable="false"
                relationship="left"
@@ -61,11 +68,21 @@
          </view>
          <view
                closeable="false"
+               id="com.weiglewilczek.xwt.launcher.views.LaunchConfigurations"
+               minimized="false"
+               moveable="false"
+               relationship="stack"
+               relative="com.weiglewilczek.xwt.launcher.views.Groups"
+               showTitle="false"
+               standalone="true">
+         </view>
+         <view
+               closeable="false"
                id="com.weiglewilczek.xwt.launcher.views.EclipseInstallations"
                minimized="false"
                moveable="false"
                relationship="stack"
-               relative="com.weiglewilczek.xwt.launcher.views.LaunchConfigurations"
+               relative="com.weiglewilczek.xwt.launcher.views.Groups"
                showTitle="false"
                standalone="true">
          </view>
@@ -75,7 +92,7 @@
                minimized="false"
                moveable="false"
                relationship="stack"
-               relative="com.weiglewilczek.xwt.launcher.views.LaunchConfigurations"
+               relative="com.weiglewilczek.xwt.launcher.views.Groups"
                showTitle="false"
                standalone="true">
          </view>
@@ -218,6 +235,10 @@
       <command
             id="com.weiglewilczek.xwt.launcher.commands.OpenJavaInstallationListView"
             name="OpenJavaInstallationListView">
+      </command>
+      <command
+            id="com.weiglewilczek.xwt.launcher.commands.CreateLauncher"
+            name="CreateLauncher">
       </command>
    </extension>
    <extension
@@ -371,8 +392,10 @@
             <not>
                <with
                      variable="activePartId">
+                  <!--equals
+                        value="com.weiglewilczek.xwt.launcher.views.LaunchConfigurations"-->
                   <equals
-                        value="com.weiglewilczek.xwt.launcher.views.LaunchConfigurations">
+                        value="com.weiglewilczek.xwt.launcher.views.Groups">
                   </equals>
                </with>
             </not>
@@ -517,6 +540,10 @@
                </iterate>
             </with>
          </enabledWhen>
+      </handler>
+      <handler
+            class="com.weiglewilczek.xwt.launcher.handlers.NewLaunchConfiguration"
+            commandId="com.weiglewilczek.xwt.launcher.commands.CreateLauncher">
       </handler>
    </extension>
    <extension

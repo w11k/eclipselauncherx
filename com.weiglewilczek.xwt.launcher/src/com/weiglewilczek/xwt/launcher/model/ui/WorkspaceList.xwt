@@ -13,15 +13,15 @@
 				verticalAlignment="FILL"></GridData>
 		</TableViewer.control.layoutdata>
 		<TableViewer.columns>
-			<TableViewerColumn text="Configuration" width="100" property="name" name="configurationColumn"/>
-			<TableViewerColumn text="Workspace" width="260" property="workspacePath"/>
-			<TableViewerColumn text="Eclipse" width="70" property="eclipse"/>
-			<TableViewerColumn text="Java VM" width="70" property="java"/>
-			<TableViewerColumn text="VM Parameters" width="100" property="vmArgs"/>
+			<TableViewerColumn text="Configuration" width="200" property="name" name="configurationColumn"/>
+			<TableViewerColumn text="Workspace" width="230" property="workspacePath"/>
+			<TableViewerColumn text="Eclipse" width="80" property="eclipse"/>
+			<TableViewerColumn text="Java" width="30" property="java"/>
+			<TableViewerColumn text="VM Parameters" width="85" property="vmArgs"/>
 		</TableViewer.columns>
 		<TableViewer.table headerVisible="true"/>
 		<TableViewer.labelProvider>
-			<y:NumericLabelProvider/>
+			<y:TableLabelProvider/>
 		</TableViewer.labelProvider>
 	</TableViewer>
 </Composite>

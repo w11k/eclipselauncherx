@@ -14,9 +14,14 @@ public enum PreferenceFields {
 	 * List of ids of JavaInstallations, used as preference prefix of JavaInstallationFields
 	 */
 	JAVA_INSTALLATIONS("JavaInstallations"),
+	/**
+	 * List of ids of Groups, used as preference prefix of GroupFields
+	 */
+	GROUPS("Groups"),
 	LAUNCH_CONFIGURATION_NEXT_ID("LaunchConfigurationNextId"),
 	ECLIPSE_INSTALLATION_NEXT_ID("EclipseInstallationNextId"),
-	JAVA_INSTALLATION_NEXT_ID("JavaInstallationNextId");
+	JAVA_INSTALLATION_NEXT_ID("JavaInstallationNextId"),
+	GROUP_NEXT_ID("GroupNextId");
 
 	private String name;
 

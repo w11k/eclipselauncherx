@@ -6,9 +6,12 @@ Bei einem Update auf eine andere Programmversion, bitte diese Datei (bzw. dern O
 Known Bug:
 Vor dem Start muss dem Owner noch Execution-Rechte für die Datei EclipseLauncherX.app/Contents/MacOS/EclipseLauncherX hinzugefügt werden.
 Also:
-chmod o+x ....EclipseLauncherX.app/Contents/MacOS/EclipseLauncherX 
+chmod +wx ....EclipseLauncherX.app/Contents/MacOS/EclipseLauncherX 
 
 Release Notes:
+
+1.0:
+- Die LaunchConfigurations werden zu Gruppen gefasst und als Struktur dargestellt.
 
 RC3:
 - Per Doppelklick auf eine Workspace-Konfiguration wird diese gestartet (war: der Edit-Dialog wird angezeigt)

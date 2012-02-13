@@ -18,7 +18,7 @@
 		</TableViewer.columns>
 		<TableViewer.table headerVisible="true"/>
 		<TableViewer.labelProvider>
-			<y:NumericLabelProvider/>
+			<y:TableLabelProvider/>
 		</TableViewer.labelProvider>
 	</TableViewer>
 </Composite>
