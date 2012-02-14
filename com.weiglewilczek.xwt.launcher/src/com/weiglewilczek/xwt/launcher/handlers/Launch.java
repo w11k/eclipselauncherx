@@ -11,8 +11,8 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import com.weiglewilczek.eclipse.utils.ui.swt.program.ProgramFactory;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
+import com.weiglewilczek.xwt.launcher.util.Program;
 
 public class Launch extends AbstractHandler {
 
@@ -63,7 +63,7 @@ public class Launch extends AbstractHandler {
 		}
 
 		if (commands.size() > 0) {
-			ProgramFactory.execute(commands.toArray(new String[0]));
+			new Program().execute(commands.toArray(new String[0]));
 		}
 	}
 

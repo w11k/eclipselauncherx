@@ -24,25 +24,4 @@
          version="0.0.0"
          unpack="false"/>
 
-   <plugin
-         id="com.weiglewilczek.eclipse.utils.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.weiglewilczek.eclipse.utils.ui.carbon"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
-
-   <plugin
-         id="com.weiglewilczek.utils"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
 </feature>

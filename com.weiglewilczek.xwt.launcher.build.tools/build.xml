@@ -164,27 +164,6 @@
 		<delete dir="${workspace}/com.weiglewilczek.xwt.launcher/@dot" />
 		
 		<delete failonerror="false">
-			<fileset dir="${workspace}/com.weiglewilczek.utils">
-			    <include name="*.jar"/>
-			</fileset>
-		</delete>
-		<delete dir="${workspace}/com.weiglewilczek.utils/@dot" />
-		
-		<delete failonerror="false">
-			<fileset dir="${workspace}/com.weiglewilczek.eclipse.utils.ui">
-			    <include name="*.jar"/>
-			</fileset>
-		</delete>
-		<delete dir="${workspace}/com.weiglewilczek.eclipse.utils.ui/@dot" />
-		
-		<delete failonerror="false">
-			<fileset dir="${workspace}/com.weiglewilczek.eclipse.utils.ui.carbon">
-			    <include name="*.jar"/>
-			</fileset>
-		</delete>
-		<delete dir="${workspace}/com.weiglewilczek.eclipse.utils.ui.carbon/@dot" />
-		
-		<delete failonerror="false">
 			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher.feature">
 			    <include name="*.jar"/>
 			</fileset>
