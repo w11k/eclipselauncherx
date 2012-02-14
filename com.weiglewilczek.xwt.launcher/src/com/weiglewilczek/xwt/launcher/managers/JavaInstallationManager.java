@@ -50,9 +50,9 @@ public class JavaInstallationManager extends
 		List<LaunchConfiguration> launchConfigurations = LaunchConfigurationManager
 				.getInstance().enumerateAll();
 		for (LaunchConfiguration launchConfiguration : launchConfigurations) {
-			if (launchConfiguration.getEclipse().equals(object)) {
-				throw new Exception(
-						"The JavaInstallation cannot be delete. It is referenced by min. a LaunchConfiguration.");
+			if (object.equals(launchConfiguration.getJava())) {
+				throw new ConstraintViolationException(
+						"The Java Installation cannot be delete. It is referenced by min. a Launch Configuration.");
 			}
 		}
 

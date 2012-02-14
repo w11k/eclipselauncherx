@@ -8,6 +8,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -76,11 +77,23 @@ public class NewLaunchConfiguration extends AbstractHandler {
 				if (!(PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 						.getActivePage().getActivePart() instanceof GroupsView)) {
 					try {
-						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("com.weiglewilczek.xwt.launcher.views.Groups");
+						PlatformUI
+								.getWorkbench()
+								.getActiveWorkbenchWindow()
+								.getActivePage()
+								.showView(
+										"com.weiglewilczek.xwt.launcher.views.Groups");
 					} catch (PartInitException e) {
-						throw new ExecutionException("Error opening groups view", e);
+						throw new ExecutionException(
+								"Error opening groups view", e);
 					}
+
 				}
+				GroupsView view = (GroupsView) PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getActivePage()
+						.getActivePart();
+				view.getTree().setSelection(
+						new StructuredSelection(configuration));
 			} catch (BackingStoreException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

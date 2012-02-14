@@ -1,7 +1,9 @@
 package com.weiglewilczek.xwt.launcher.managers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -25,8 +27,10 @@ public abstract class BaseManager<T extends ModelElement<F>, F extends BaseField
 
 	private final List<IListener> listenerList = new ArrayList<IListener>();
 
-	public BaseManager() {
+	private final Map<Long, T> cache;
 
+	public BaseManager() {
+		cache = new HashMap<Long, T>();
 	}
 
 	public T create(T object) throws BackingStoreException {
@@ -45,6 +49,10 @@ public abstract class BaseManager<T extends ModelElement<F>, F extends BaseField
 			store.setValue(getNextIdField().getName(), nextVal + 1);
 
 			commit();
+		}
+
+		synchronized (cache) {
+			cache.put(object.getId(), object);
 		}
 
 		handleCreated(object);
@@ -81,12 +89,13 @@ public abstract class BaseManager<T extends ModelElement<F>, F extends BaseField
 	}
 
 	public void delete(T object) throws Exception {
+		Long id = object.getId();
+
 		synchronized (store) {
-			Long id = object.getId();
 
 			String ids = store.getString(getIdsListField().getName());
 			if (ids.equals(id.toString())) {
-				store.setValue(getIdsListField().getName(), null);
+				store.setValue(getIdsListField().getName(), "");
 			} else if (ids.startsWith(id.toString() + ",")) {
 				ids = ids.replaceFirst(id.toString() + ",", "");
 				store.setValue(getIdsListField().getName(), ids);
@@ -108,12 +117,25 @@ public abstract class BaseManager<T extends ModelElement<F>, F extends BaseField
 			commit();
 		}
 
+		synchronized (cache) {
+			cache.remove(id);
+		}
+
 		handleDeleted(object);
 	}
 
 	public T get(Long id) {
-		T object = createModel();
-		object.setId(id);
+
+		final T object;
+		synchronized (cache) {
+			if (cache.containsKey(id)) {
+				object = cache.get(id);
+			} else {
+				object = createModel();
+				object.setId(id);
+				cache.put(id, object);
+			}
+		}
 
 		synchronized (store) {
 

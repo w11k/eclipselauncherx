@@ -12,11 +12,12 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.handlers.IHandlerService;
 
-import com.weiglewilczek.eclipse.utils.ui.jface.viewers.AbstractColumnViewerSorter;
 import com.weiglewilczek.xwt.launcher.listener.IListener;
 import com.weiglewilczek.xwt.launcher.listener.ListenerType;
+import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
 import com.weiglewilczek.xwt.launcher.managers.GroupManager;
 import com.weiglewilczek.xwt.launcher.managers.JavaInstallationManager;
+import com.weiglewilczek.xwt.launcher.managers.LaunchConfigurationManager;
 import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 import com.weiglewilczek.xwt.launcher.model.Group;
 import com.weiglewilczek.xwt.launcher.model.GroupsDataContext;
@@ -25,6 +26,7 @@ import com.weiglewilczek.xwt.launcher.model.JavaInstallation;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 import com.weiglewilczek.xwt.launcher.model.ModelElement;
 import com.weiglewilczek.xwt.launcher.model.ObservableGroup;
+import com.weiglewilczek.xwt.launcher.util.AbstractColumnViewerSorter;
 
 public class GroupsView extends XWTViewPart implements IListener {
 
@@ -33,6 +35,9 @@ public class GroupsView extends XWTViewPart implements IListener {
 	private TreeViewer groupsViewer;
 
 	public GroupsView() {
+		GroupManager.getInstance().addListener(this);
+		LaunchConfigurationManager.getInstance().addListener(this);
+		EclipseInstallationManager.getInstance().addListener(this);
 		JavaInstallationManager.getInstance().addListener(this);
 
 		context = new GroupsDataContext(GroupManager.getInstance()
@@ -81,6 +86,20 @@ public class GroupsView extends XWTViewPart implements IListener {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
+						} else if (selection != null
+								&& selection instanceof IStructuredSelection
+								&& ((IStructuredSelection) selection)
+										.getFirstElement() instanceof ObservableGroup) {
+							IHandlerService hs = (IHandlerService) getSite()
+									.getService(IHandlerService.class);
+							try {
+								hs.executeCommand(
+										"com.weiglewilczek.xwt.launcher.commands.Edit",
+										null);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
 					}
 				});
@@ -118,15 +137,16 @@ public class GroupsView extends XWTViewPart implements IListener {
 
 	@Override
 	public void handle(ListenerType type, ModelElement<?> object) {
-		// TODO: UPDATE: The Managers keep instances on update, so the related
-		// instance was updated as well
 		if (object instanceof Group) {
 			switch (type) {
 			case CREATE:
-				context.getGroups().add(new ObservableGroup((Group) object));
+				context.addGroup((Group) object);
 				groupsViewer.refresh();
 				break;
 			case UPDATE:
+				ObservableGroup observableGroup = context
+						.getGroup((Group) object);
+				observableGroup.synchronizeConfigurations();
 				groupsViewer.refresh(true);
 				break;
 			case DELETE:
@@ -141,36 +161,19 @@ public class GroupsView extends XWTViewPart implements IListener {
 		} else if (object instanceof LaunchConfiguration
 				&& type.equals(ListenerType.UPDATE)) {
 			groupsViewer.refresh(true);
+		} else if (object instanceof LaunchConfiguration
+				&& type.equals(ListenerType.DELETE)) {
+			groupsViewer.refresh(true);
 		} else if (object instanceof EclipseInstallation
 				&& type.equals(ListenerType.UPDATE)) {
-			EclipseInstallation eclipse = (EclipseInstallation) object;
-
-			for (Object writableObject : context.getGroups()) {
-				ObservableGroup group = (ObservableGroup) writableObject;
-				for (Object writableConfiguration : group.getConfigurations()) {
-					LaunchConfiguration launchConfiguration = (LaunchConfiguration) writableConfiguration;
-					if (launchConfiguration.getEclipse().equals(eclipse)) {
-						launchConfiguration.setEclipse(eclipse);
-					}
-				}
-			}
-
 			groupsViewer.refresh(true);
 		} else if (object instanceof JavaInstallation
 				&& type.equals(ListenerType.UPDATE)) {
-			JavaInstallation java = (JavaInstallation) object;
-
-			for (Object writableObject : context.getGroups()) {
-				ObservableGroup group = (ObservableGroup) writableObject;
-				for (Object writableConfiguration : group.getConfigurations()) {
-					LaunchConfiguration launchConfiguration = (LaunchConfiguration) writableConfiguration;
-					if (launchConfiguration.getJava().equals(java)) {
-						launchConfiguration.setJava(java);
-					}
-				}
-			}
-
 			groupsViewer.refresh(true);
 		}
+	}
+
+	public TreeViewer getTree() {
+		return groupsViewer;
 	}
 }

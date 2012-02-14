@@ -13,7 +13,7 @@ public class GroupsDataContext {
 	public GroupsDataContext(List<Group> groups) {
 		this.groups = new WritableList();
 		groupToObservableMap = new HashMap<Group, ObservableGroup>();
-		
+
 		for (Group group : groups) {
 			ObservableGroup obserableGroup = new ObservableGroup(group);
 			groupToObservableMap.put(group, obserableGroup);
@@ -24,7 +24,12 @@ public class GroupsDataContext {
 	public WritableList getGroups() {
 		return groups;
 	}
-	
+
+	public void addGroup(Group group) {
+		groupToObservableMap.put(group, new ObservableGroup(group));
+		groups.add(groupToObservableMap.get(group));
+	}
+
 	public ObservableGroup getGroup(Group group) {
 		return groupToObservableMap.get(group);
 	}

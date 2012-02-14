@@ -18,7 +18,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.part.ViewPart;
 
-import com.weiglewilczek.eclipse.utils.ui.jface.viewers.AbstractColumnViewerSorter;
 import com.weiglewilczek.xwt.launcher.listener.IListener;
 import com.weiglewilczek.xwt.launcher.listener.ListenerType;
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
@@ -29,6 +28,7 @@ import com.weiglewilczek.xwt.launcher.model.JavaInstallation;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 import com.weiglewilczek.xwt.launcher.model.ModelElement;
 import com.weiglewilczek.xwt.launcher.model.WorkspaceListDataContext;
+import com.weiglewilczek.xwt.launcher.util.AbstractColumnViewerSorter;
 
 public class WorkspaceListView extends ViewPart implements IListener {
 

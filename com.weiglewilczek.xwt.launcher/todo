@@ -1,17 +1,11 @@
 TODO:
-Achtung: die org.eclipse.e4.xwt_0.9.1.v20100905.jar in /Applications/eclipse/eclipse3.6 ist die gepatchte aus dem Workspace, da der build anscheinend das Target bzw. aus dem workspace nicht anzieht
+!!!Achtung: die org.eclipse.e4.xwt_0.9.1.v20100905.jar in /Applications/eclipse/eclipse3.6 ist die gepatchte aus dem Workspace, da der build anscheinend das Target bzw. aus dem workspace nicht anzieht!!!
+- Überstruktur "Projekte" für LaunchConfigs anlegen lassen (auf tree-Darstellung anpassen)
+-- Extra ToolItem für Create-LaunchConfiguration: immer aktiv, switched ggf. zur GroupsView: OK aber: -> select new one: reveal in tree
+-- DnD von LaunchConfigs
+- CRUD, listener und update testen
 
 Features:
-- Überstruktur "Projekte" für LaunchConfigs anlegen lassen (auf tree-Darstellung anpassen)
--- Extra ToolItem für Create-LaunchConfiguration: immer aktiv, switched ggf. zur GroupsView  \
---- Ist eine Gruppe ausgewählt, wird die Config unter der Gruppe erstellt angelegt            \ DONE -> Test
---- Ist eine LaunchConfig ausgewählt wird unter der Parent Gruppe angelegt                    /
---- Ist keine Gruppe/LaunchConfig ausgewählt, wird die Config der "Others"-Gruppe hinzugefügt/
---- Default-Create-ToolItem während der GruppenView soll für eine neue Gruppe stehen
--- CRUD Handler für Groups/ObservableGroups
--- DnD von LaunchConfigs
--- Icon für Groups im Tree, ggf. änderbar
---- Icon Ablage, Manager?
+-Icons für Groups im Tree, ggf. änderbar
+-- Icon Ablage, Manager?
 - Menu über die Launchconfigs als Dockmenu anzeigen
-
-Object-Cache in den Managern, damit die Object-Instancen auch bei einem get(id) gleich bleiben (über get(id) werden subelemente geholt)

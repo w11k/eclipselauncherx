@@ -1,6 +1,7 @@
 package com.weiglewilczek.xwt.launcher.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.weiglewilczek.xwt.launcher.managers.GroupFields;
@@ -11,7 +12,7 @@ public class Group extends ModelElement<GroupFields> implements Serializable {
 
 	private String name;
 
-	private List<LaunchConfiguration> configurations;
+	private List<LaunchConfiguration> configurations = new ArrayList<LaunchConfiguration>();
 
 	public Group(String name, List<LaunchConfiguration> configurations) {
 		this.name = name;

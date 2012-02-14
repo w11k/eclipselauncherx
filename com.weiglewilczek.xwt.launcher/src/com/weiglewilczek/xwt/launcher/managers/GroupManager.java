@@ -11,8 +11,13 @@ import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 public class GroupManager extends BaseManager<Group, GroupFields> {
 	private static GroupManager instance;
 
+	private final Group otherGroup;
+
 	private GroupManager() {
 		super();
+		otherGroup = new Group();
+		otherGroup.setId(-1l);
+		otherGroup.setName("Others");
 	}
 
 	public static final GroupManager getInstance() {
@@ -26,7 +31,7 @@ public class GroupManager extends BaseManager<Group, GroupFields> {
 	public List<Group> enumerateAll() {
 		List<Group> groups = super.enumerateAll(Group.class);
 
-		Group others = createOtherGroup();
+		Group others = reloadOtherGroup();
 		groups.add(others);
 
 		return groups;
@@ -64,7 +69,7 @@ public class GroupManager extends BaseManager<Group, GroupFields> {
 		if (id > -1) {
 			return super.get(id);
 		} else {
-			return createOtherGroup();
+			return reloadOtherGroup();
 		}
 	}
 
@@ -73,13 +78,13 @@ public class GroupManager extends BaseManager<Group, GroupFields> {
 		if (object.getId() > -1) {
 			return super.update(object);
 		} else {
-			Group update = createOtherGroup();
+			Group update = reloadOtherGroup();
 			handleUpdated(update);
 			return update;
 		}
 	}
 
-	private Group createOtherGroup() {
+	private Group reloadOtherGroup() {
 		List<Group> groups = super.enumerateAll(Group.class);
 
 		List<LaunchConfiguration> allConfigs = LaunchConfigurationManager
@@ -99,9 +104,8 @@ public class GroupManager extends BaseManager<Group, GroupFields> {
 			}
 		}
 
-		Group others = new Group("Others", otherConfigs);
-		others.setId(-1l);
-		return others;
+		otherGroup.setConfigurations(otherConfigs);
+		return otherGroup;
 	}
 
 	public Group getGroupForConfiguration(LaunchConfiguration configuration) {
@@ -112,6 +116,6 @@ public class GroupManager extends BaseManager<Group, GroupFields> {
 			}
 		}
 
-		return createOtherGroup();
+		return reloadOtherGroup();
 	}
 }

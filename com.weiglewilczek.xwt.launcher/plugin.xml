@@ -165,6 +165,10 @@
                   icon="icons/new.gif">
             </command>
             <command
+                  commandId="com.weiglewilczek.xwt.launcher.commands.CreateLauncher"
+                  icon="icons/create_launcher.png">
+            </command>
+            <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.Edit"
                   icon="icons/edit.gif">
             </command>
@@ -238,7 +242,7 @@
       </command>
       <command
             id="com.weiglewilczek.xwt.launcher.commands.CreateLauncher"
-            name="CreateLauncher">
+            name="Create Launch Configuration">
       </command>
    </extension>
    <extension
@@ -327,6 +331,34 @@
          </activeWhen>
       </handler>
       <handler
+            class="com.weiglewilczek.xwt.launcher.handlers.EditGroup"
+            commandId="com.weiglewilczek.xwt.launcher.commands.Edit">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <instanceof
+                        value="com.weiglewilczek.xwt.launcher.model.ObservableGroup">
+                  </instanceof>
+               </iterate>
+            </with>
+         </enabledWhen>
+         <activeWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <instanceof
+                        value="com.weiglewilczek.xwt.launcher.model.ObservableGroup">
+                  </instanceof>
+               </iterate>
+            </with>
+         </activeWhen>
+      </handler>
+      <handler
             class="com.weiglewilczek.xwt.launcher.handlers.NewEclipseInstallation"
             commandId="com.weiglewilczek.xwt.launcher.commands.New">
          <enabledWhen>
@@ -381,6 +413,26 @@
                   variable="activePartId">
                <equals
                      value="com.weiglewilczek.xwt.launcher.views.LaunchConfigurations">
+               </equals>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.weiglewilczek.xwt.launcher.handlers.NewGroup"
+            commandId="com.weiglewilczek.xwt.launcher.commands.New">
+         <activeWhen>
+            <with
+                  variable="activePartId">
+               <equals
+                     value="com.weiglewilczek.xwt.launcher.views.Groups">
+               </equals>
+            </with>
+         </activeWhen>
+         <enabledWhen>
+            <with
+                  variable="activePartId">
+               <equals
+                     value="com.weiglewilczek.xwt.launcher.views.Groups">
                </equals>
             </with>
          </enabledWhen>
@@ -536,6 +588,34 @@
                      operator="and">
                   <instanceof
                         value="com.weiglewilczek.xwt.launcher.model.JavaInstallation">
+                  </instanceof>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.weiglewilczek.xwt.launcher.handlers.DeleteGroup"
+            commandId="org.eclipse.ui.edit.delete">
+         <activeWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <instanceof
+                        value="com.weiglewilczek.xwt.launcher.model.ObservableGroup">
+                  </instanceof>
+               </iterate>
+            </with>
+         </activeWhen>
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <instanceof
+                        value="com.weiglewilczek.xwt.launcher.model.ObservableGroup">
                   </instanceof>
                </iterate>
             </with>
