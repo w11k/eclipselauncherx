@@ -110,6 +110,12 @@
                   label="New">
             </command>
             <command
+                  commandId="com.weiglewilczek.xwt.launcher.commands.CreateLauncher"
+                  icon="icons/create_launcher.png"
+                  label="Create Launcher"
+                  style="push">
+            </command>
+            <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.Edit"
                   icon="icons/edit.gif"
                   label="Edit">
