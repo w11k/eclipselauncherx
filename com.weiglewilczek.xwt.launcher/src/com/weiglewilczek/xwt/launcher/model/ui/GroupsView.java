@@ -8,6 +8,9 @@ import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.dnd.DND;
+import org.eclipse.swt.dnd.TextTransfer;
+import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.handlers.IHandlerService;
@@ -124,6 +127,17 @@ public class GroupsView extends XWTViewPart implements IListener {
 					};
 					sorter.setSorter(sorter, AbstractColumnViewerSorter.ASC);
 				}
+
+				int options = DND.DROP_MOVE;
+
+				Transfer[] transfers = new Transfer[] { TextTransfer
+						.getInstance() };
+
+				groupsViewer.addDragSupport(options, transfers,
+						new DragSourceAdapter(groupsViewer));
+
+				groupsViewer.addDropSupport(options, transfers,
+						new DropAdapter(groupsViewer));
 			}
 		}
 	}

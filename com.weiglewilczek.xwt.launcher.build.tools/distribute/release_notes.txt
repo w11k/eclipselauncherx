@@ -11,7 +11,10 @@ chmod +wx ....EclipseLauncherX.app/Contents/MacOS/EclipseLauncherX
 Release Notes:
 
 1.0:
-- Die LaunchConfigurations werden zu Gruppen gefasst und als Struktur dargestellt.
+- Neues Feature: Gruppen: Die LaunchConfigurations in Gruppen zusammengefasst und in einem Tree dargestellt.
+-- LaunchConfigurations können per DnD zwischen den Gruppen verschoben werden
+-- Die Version ist aufwärts und abwärtskompatibel zu den Release Candidates!
+- About Action hinzugefügt
 
 RC3:
 - Per Doppelklick auf eine Workspace-Konfiguration wird diese gestartet (war: der Edit-Dialog wird angezeigt)
