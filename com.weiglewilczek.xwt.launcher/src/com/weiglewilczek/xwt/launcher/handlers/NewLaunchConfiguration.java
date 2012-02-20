@@ -12,7 +12,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.osgi.service.prefs.BackingStoreException;
+import java.util.prefs.BackingStoreException;
 
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
 import com.weiglewilczek.xwt.launcher.managers.GroupManager;

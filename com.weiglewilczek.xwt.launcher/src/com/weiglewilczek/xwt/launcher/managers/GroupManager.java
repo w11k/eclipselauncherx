@@ -2,8 +2,7 @@ package com.weiglewilczek.xwt.launcher.managers;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.osgi.service.prefs.BackingStoreException;
+import java.util.prefs.BackingStoreException;
 
 import com.weiglewilczek.xwt.launcher.model.Group;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
