@@ -159,6 +159,12 @@
                   style="push">
             </command>
          </menu>
+         <menu
+               label="Help">
+            <command
+                  commandId="org.eclipse.ui.help.aboutAction">
+            </command>
+         </menu>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -630,6 +636,18 @@
       <handler
             class="com.weiglewilczek.xwt.launcher.handlers.NewLaunchConfiguration"
             commandId="com.weiglewilczek.xwt.launcher.commands.CreateLauncher">
+      </handler>
+      <handler
+            class="com.weiglewilczek.xwt.launcher.handlers.About"
+            commandId="org.eclipse.ui.help.aboutAction">
+            <activeWhen>
+            <with
+                  variable="activePartId">
+               <equals
+                     value="com.weiglewilczek.xwt.launcher.views.Groups">
+               </equals>
+            </with>
+         </activeWhen>
       </handler>
    </extension>
    <extension
