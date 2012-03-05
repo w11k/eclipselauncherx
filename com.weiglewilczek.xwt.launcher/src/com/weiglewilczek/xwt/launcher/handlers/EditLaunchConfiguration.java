@@ -8,7 +8,6 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
-import java.util.prefs.BackingStoreException;
 
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
 import com.weiglewilczek.xwt.launcher.managers.JavaInstallationManager;
@@ -29,9 +28,11 @@ public class EditLaunchConfiguration extends AbstractHandler {
 				&& currentSelection instanceof IStructuredSelection) {
 			IStructuredSelection selection = (IStructuredSelection) currentSelection;
 
-			if (selection.getFirstElement() != null && selection.getFirstElement() instanceof LaunchConfiguration) {
-				LaunchConfiguration configuration = (LaunchConfiguration)selection.getFirstElement();
-				
+			if (selection.getFirstElement() != null
+					&& selection.getFirstElement() instanceof LaunchConfiguration) {
+				LaunchConfiguration configuration = (LaunchConfiguration) selection
+						.getFirstElement();
+
 				List<EclipseInstallation> eclipses = EclipseInstallationManager
 						.getInstance().enumerateAll();
 				WritableList writableEclipses = new WritableList();
@@ -41,8 +42,9 @@ public class EditLaunchConfiguration extends AbstractHandler {
 						.getInstance().enumerateAll();
 				WritableList writableJavas = new WritableList();
 				writableJavas.addAll(javas);
-				
-				LaunchConfigurationDataContext dataContext = new LaunchConfigurationDataContext(configuration, writableEclipses, writableJavas);
+
+				LaunchConfigurationDataContext dataContext = new LaunchConfigurationDataContext(
+						configuration, writableEclipses, writableJavas);
 
 				LaunchConfigurationDialog launchConfiguration = new LaunchConfigurationDialog(
 						HandlerUtil.getActiveShell(event), dataContext);
@@ -50,14 +52,14 @@ public class EditLaunchConfiguration extends AbstractHandler {
 					try {
 						LaunchConfigurationManager.getInstance().update(
 								configuration);
-					} catch (BackingStoreException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 			}
 		}
-		
+
 		return null;
 	}
 

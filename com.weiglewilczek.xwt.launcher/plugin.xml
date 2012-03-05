@@ -103,6 +103,19 @@
       <menuContribution
             locationURI="menu:org.eclipse.ui.main.menu">
          <menu
+               label="File">
+            <command
+                  commandId="com.weiglewilczek.xwt.launcher.commands.Import"
+                  icon="icons/import.gif"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.weiglewilczek.xwt.launcher.commands.Export"
+                  icon="icons/export.gif"
+                  style="push">
+            </command>
+         </menu>
+         <menu
                label="Edit">
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.New"
@@ -255,6 +268,14 @@
       <command
             id="com.weiglewilczek.xwt.launcher.commands.CreateLauncher"
             name="Create Launch Configuration">
+      </command>
+      <command
+            id="com.weiglewilczek.xwt.launcher.commands.Import"
+            name="Import from File">
+      </command>
+      <command
+            id="com.weiglewilczek.xwt.launcher.commands.Export"
+            name="Export to File">
       </command>
    </extension>
    <extension
@@ -648,6 +669,14 @@
                </equals>
             </with>
          </activeWhen>
+      </handler>
+      <handler
+            class="com.weiglewilczek.xwt.launcher.handlers.Import"
+            commandId="com.weiglewilczek.xwt.launcher.commands.Import">
+      </handler>
+      <handler
+            class="com.weiglewilczek.xwt.launcher.handlers.Export"
+            commandId="com.weiglewilczek.xwt.launcher.commands.Export">
       </handler>
    </extension>
    <extension

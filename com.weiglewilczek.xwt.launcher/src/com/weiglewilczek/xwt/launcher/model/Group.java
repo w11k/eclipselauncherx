@@ -48,7 +48,7 @@ public class Group extends ModelElement<GroupFields> implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj != null && obj instanceof JavaInstallation) {
+		if (obj != null && obj instanceof Group) {
 			return super.equals(obj);
 		}
 

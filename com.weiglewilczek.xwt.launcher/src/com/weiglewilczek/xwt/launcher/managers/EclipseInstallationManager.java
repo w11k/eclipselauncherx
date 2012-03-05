@@ -1,6 +1,9 @@
 package com.weiglewilczek.xwt.launcher.managers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
@@ -8,17 +11,33 @@ import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 public class EclipseInstallationManager extends
 		BaseManager<EclipseInstallation, EclipseInstallationFields> {
 
-	private static EclipseInstallationManager instance;
+	private static Map<ManagerContext, EclipseInstallationManager> instances = new HashMap<ManagerContext, EclipseInstallationManager>();
 
 	private EclipseInstallationManager() {
 		super();
 	}
 
-	public static final EclipseInstallationManager getInstance() {
-		if (instance == null)
-			instance = new EclipseInstallationManager();
+	public EclipseInstallationManager(ManagerContext contextType,
+			Properties properties) {
+		super(contextType, properties);
+		instances.put(contextType, this);
+	}
 
-		return instance;
+	public static final EclipseInstallationManager getInstance() {
+		if (instances.isEmpty())
+			instances.put(ManagerContext.APPLICATION,
+					new EclipseInstallationManager());
+
+		return instances.get(ManagerContext.APPLICATION);
+	}
+
+	public static final EclipseInstallationManager getInstance(
+			ManagerContext contextType) {
+		if (!instances.containsKey(contextType)) {
+			throw new RuntimeException("Instance not initialized");
+		}
+
+		return instances.get(contextType);
 	}
 
 	@Override
@@ -49,7 +68,7 @@ public class EclipseInstallationManager extends
 	@Override
 	public void delete(EclipseInstallation object) throws Exception {
 		List<LaunchConfiguration> launchConfigurations = LaunchConfigurationManager
-				.getInstance().enumerateAll();
+				.getInstance(contextType).enumerateAll();
 		for (LaunchConfiguration launchConfiguration : launchConfigurations) {
 			if (object.equals(launchConfiguration.getEclipse())) {
 				throw new ConstraintViolationException(

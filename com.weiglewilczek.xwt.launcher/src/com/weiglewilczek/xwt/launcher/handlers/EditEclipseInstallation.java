@@ -1,7 +1,5 @@
 package com.weiglewilczek.xwt.launcher.handlers;
 
-import java.util.prefs.BackingStoreException;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -26,7 +24,7 @@ public class EditEclipseInstallation extends AbstractHandler {
 		if (dialog.open() == EclipseInstallationDialog.OK) {
 			try {
 				EclipseInstallationManager.getInstance().update(eclipse);
-			} catch (BackingStoreException e) {
+			} catch (Exception e) {
 				throw new ExecutionException(
 						"Error updating eclipse installation: "
 								+ eclipse.getName(), e);

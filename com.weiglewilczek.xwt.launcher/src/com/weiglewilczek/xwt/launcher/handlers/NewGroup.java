@@ -4,7 +4,6 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.handlers.HandlerUtil;
-import java.util.prefs.BackingStoreException;
 
 import com.weiglewilczek.xwt.launcher.managers.GroupManager;
 import com.weiglewilczek.xwt.launcher.model.Group;
@@ -22,7 +21,7 @@ public class NewGroup extends AbstractHandler {
 		if (groupDialog.open() == GroupDialog.OK) {
 			try {
 				GroupManager.getInstance().create(group);
-			} catch (BackingStoreException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

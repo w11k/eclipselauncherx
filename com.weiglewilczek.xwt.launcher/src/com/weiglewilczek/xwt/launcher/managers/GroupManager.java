@@ -1,14 +1,16 @@
 package com.weiglewilczek.xwt.launcher.managers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.prefs.BackingStoreException;
+import java.util.Map;
+import java.util.Properties;
 
 import com.weiglewilczek.xwt.launcher.model.Group;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 
 public class GroupManager extends BaseManager<Group, GroupFields> {
-	private static GroupManager instance;
+	private static Map<ManagerContext, GroupManager> instances = new HashMap<ManagerContext, GroupManager>();
 
 	private final Group otherGroup;
 
@@ -19,11 +21,28 @@ public class GroupManager extends BaseManager<Group, GroupFields> {
 		otherGroup.setName("Others");
 	}
 
-	public static final GroupManager getInstance() {
-		if (instance == null)
-			instance = new GroupManager();
+	public GroupManager(ManagerContext contextType, Properties properties) {
+		super(contextType, properties);
+		otherGroup = new Group();
+		otherGroup.setId(-1l);
+		otherGroup.setName("Others");
 
-		return instance;
+		instances.put(contextType, this);
+	}
+
+	public static final GroupManager getInstance() {
+		if (instances.isEmpty())
+			instances.put(ManagerContext.APPLICATION, new GroupManager());
+
+		return instances.get(ManagerContext.APPLICATION);
+	}
+
+	public static final GroupManager getInstance(ManagerContext contextType) {
+		if (!instances.containsKey(contextType)) {
+			throw new RuntimeException("Instance not initialized");
+		}
+
+		return instances.get(contextType);
 	}
 
 	@Override
@@ -73,7 +92,7 @@ public class GroupManager extends BaseManager<Group, GroupFields> {
 	}
 
 	@Override
-	public Group update(Group object) throws BackingStoreException {
+	public Group update(Group object) {
 		if (object.getId() > -1) {
 			return super.update(object);
 		} else {
@@ -87,7 +106,7 @@ public class GroupManager extends BaseManager<Group, GroupFields> {
 		List<Group> groups = super.enumerateAll(Group.class);
 
 		List<LaunchConfiguration> allConfigs = LaunchConfigurationManager
-				.getInstance().enumerateAll();
+				.getInstance(contextType).enumerateAll();
 		List<LaunchConfiguration> otherConfigs = new ArrayList<LaunchConfiguration>();
 		for (LaunchConfiguration launchConfiguration : allConfigs) {
 			boolean configInGroup = false;

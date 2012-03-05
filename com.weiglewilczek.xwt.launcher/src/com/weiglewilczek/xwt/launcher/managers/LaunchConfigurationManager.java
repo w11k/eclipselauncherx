@@ -1,22 +1,41 @@
 package com.weiglewilczek.xwt.launcher.managers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 
 public class LaunchConfigurationManager extends
 		BaseManager<LaunchConfiguration, LaunchConfigurationFields> {
-	private static LaunchConfigurationManager instance;
+	private static Map<ManagerContext, LaunchConfigurationManager> instances = new HashMap<ManagerContext, LaunchConfigurationManager>();
 
 	private LaunchConfigurationManager() {
 		super();
 	}
 
-	public static final LaunchConfigurationManager getInstance() {
-		if (instance == null)
-			instance = new LaunchConfigurationManager();
+	public LaunchConfigurationManager(ManagerContext contextType,
+			Properties properties) {
+		super(contextType, properties);
+		instances.put(contextType, this);
+	}
 
-		return instance;
+	public static final LaunchConfigurationManager getInstance() {
+		if (instances.isEmpty())
+			instances.put(ManagerContext.APPLICATION,
+					new LaunchConfigurationManager());
+
+		return instances.get(ManagerContext.APPLICATION);
+	}
+
+	public static final LaunchConfigurationManager getInstance(
+			ManagerContext contextType) {
+		if (!instances.containsKey(contextType)) {
+			throw new RuntimeException("Instance not initialized");
+		}
+
+		return instances.get(contextType);
 	}
 
 	@Override

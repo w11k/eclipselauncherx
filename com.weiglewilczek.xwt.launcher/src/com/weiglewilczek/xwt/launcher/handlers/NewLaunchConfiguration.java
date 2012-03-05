@@ -12,7 +12,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
-import java.util.prefs.BackingStoreException;
 
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
 import com.weiglewilczek.xwt.launcher.managers.GroupManager;
@@ -94,7 +93,7 @@ public class NewLaunchConfiguration extends AbstractHandler {
 						.getActivePart();
 				view.getTree().setSelection(
 						new StructuredSelection(configuration));
-			} catch (BackingStoreException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

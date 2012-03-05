@@ -13,8 +13,12 @@ Release Notes:
 1.0:
 - Neues Feature: Gruppen: Die LaunchConfigurations in Gruppen zusammengefasst und in einem Tree dargestellt.
 -- LaunchConfigurations können per DnD zwischen den Gruppen verschoben werden
--- Die Version ist aufwärts und abwärtskompatibel zu den Release Candidates!
+- Die eingegebenen Daten werden je nach Platform nutzerspezifisch gespeichert (Windows: User Registry, Mac: plist in User Library, Linux: ?)
+-- Schon bestehende Daten können über einen Import aus der alten Datei importiert werden
+- Export der eingegebenen Daten hinzugefügt
 - About Action hinzugefügt
+- Logging / Exception Handling hinzugefügt
+- Support für Windows und Linux hinzugefügt
 
 RC3:
 - Per Doppelklick auf eine Workspace-Konfiguration wird diese gestartet (war: der Edit-Dialog wird angezeigt)

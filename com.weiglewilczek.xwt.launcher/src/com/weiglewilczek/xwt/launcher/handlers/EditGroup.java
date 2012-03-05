@@ -5,7 +5,6 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
-import java.util.prefs.BackingStoreException;
 
 import com.weiglewilczek.xwt.launcher.managers.GroupManager;
 import com.weiglewilczek.xwt.launcher.model.Group;
@@ -32,7 +31,7 @@ public class EditGroup extends AbstractHandler {
 				if (groupDialog.open() == GroupDialog.OK) {
 					try {
 						GroupManager.getInstance().update(group);
-					} catch (BackingStoreException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

@@ -1,23 +1,41 @@
 package com.weiglewilczek.xwt.launcher.managers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import com.weiglewilczek.xwt.launcher.model.JavaInstallation;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 
 public class JavaInstallationManager extends
 		BaseManager<JavaInstallation, JavaInstallationFields> {
-	private static JavaInstallationManager instance;
+	private static Map<ManagerContext, JavaInstallationManager> instances = new HashMap<ManagerContext, JavaInstallationManager>();
 
 	private JavaInstallationManager() {
 		super();
 	}
 
-	public static final JavaInstallationManager getInstance() {
-		if (instance == null)
-			instance = new JavaInstallationManager();
+	public JavaInstallationManager(ManagerContext contextType,
+			Properties properties) {
+		super(contextType, properties);
+		instances.put(contextType, this);
+	}
 
-		return instance;
+	public static final JavaInstallationManager getInstance() {
+		if (instances.isEmpty())
+			instances.put(ManagerContext.APPLICATION,
+					new JavaInstallationManager());
+
+		return instances.get(ManagerContext.APPLICATION);
+	}
+
+	public static final JavaInstallationManager getInstance(
+			ManagerContext contextType) {
+		if (!instances.containsKey(contextType))
+			throw new RuntimeException("Instance not initialized");
+
+		return instances.get(contextType);
 	}
 
 	@Override
@@ -48,7 +66,7 @@ public class JavaInstallationManager extends
 	@Override
 	public void delete(JavaInstallation object) throws Exception {
 		List<LaunchConfiguration> launchConfigurations = LaunchConfigurationManager
-				.getInstance().enumerateAll();
+				.getInstance(contextType).enumerateAll();
 		for (LaunchConfiguration launchConfiguration : launchConfigurations) {
 			if (object.equals(launchConfiguration.getJava())) {
 				throw new ConstraintViolationException(
