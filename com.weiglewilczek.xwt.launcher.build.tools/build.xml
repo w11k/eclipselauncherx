@@ -6,18 +6,24 @@
 
      blank@weiglewilczek.com
      ====================================================================== -->
-<project name="xwt.launcher.client.releng" default="package.releng.results" basedir=".">
+<project name="xwt.launcher.client.releng" default="package.releng.results" basedir="./..">
 
-	<property file="properties/build.properties" />
-	<property file="properties/users/${user.name}.properties" />
-	<property file="build.properties" />
+	<property file="com.weiglewilczek.xwt.launcher.build.tools/properties/build.properties" />
+	<property file="${build.tools.dir}/properties/users/${user.name}.properties" />
+	<property file="${build.tools.dir}/build.properties" />
 	<property environment="env" />
 	<property name="env.BUILD_MACHINE" value="${env.COMPUTERNAME}" />
 
-	<property name="build.dir" value="${basedir}/build" />
-	<property name="distribute.dir" value="${basedir}/distribute" />
-	<property name="platform.dir" value="${basedir}/platform" />
-	<property name="product.conf.dir" value="${basedir}/etc/product-config" />
+	<property name="build.dir" value="${build.tools.dir}/build" />
+	<property name="distribute.dir" value="${build.tools.dir}/distribute" />
+	<property name="platform.dir" value="${build.tools.dir}/platform" />
+	<property name="product.conf.dir" value="${build.tools.dir}/etc/product-config" />
+
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="${build.tools.dir}/lib/ant-contrib-1.0b3.jar" />
+		</classpath>
+	</taskdef>
 
 	<!-- =================================
 	      target: update.build.version
@@ -52,50 +58,44 @@
 	</target>
 
 	<!-- ================================= 
-          target: run.releng.build              
+          target: package.releng.results             
          ================================= -->
-	<target name="run.releng.build" depends="update.build.version" description="Runs the PDE releng build.">
-		<echo>RUN.RELENG.BUILD</echo>
-
-		<copy todir="${workspace}/com.weiglewilczek.xwt.launcher/etc.temp" overwrite="true">
-			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher">
-				<include name="plugin.xml" />
-			</fileset>
-		</copy>
+	<target name="package.releng.results" depends="update.build.version" description="Runs the PDE releng build.">
+		<echo>PACKAGE.RELENG.RESULTS</echo>
 
 		<property file="${version.config.dir}/${xwt.launcher.build.version.file}" />
 
-		<copy todir="${workspace}/com.weiglewilczek.xwt.launcher" overwrite="true">
-			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher/etc.temp">
-				<include name="plugin.xml" />
-			</fileset>
-			<filterset>
-				<filter token="BUILD_VERSION" value="${build.version}" />
-				<filter token="RELEASE_CANDIDATE" value="${release.candidate}" />
-				<filter token="BUILD_DATE" value="${client.build.date}" />
-				<filter token="BUILD_TIME" value="${client.build.time}" />
-			</filterset>
-		</copy>
+		<ant antfile="${build.tools.dir}/build-pde.xml" dir="${build.tools.dir}" inheritall="true" />
 
-		<ant antfile="${basedir}/build-pde.xml" dir="${basedir}" inheritall="true" />
+		<mkdir dir="${build.dir}" />
 
-		<mkdir dir="${build.dir}"/>
-		
-		<unzip dest="${build.dir}">
-			<fileset dir="${productPath}">
-				<include name="${productName}" />
-			</fileset>
-		</unzip>
-		
-		<copy todir="${build.dir}" overwrite="true">
-            <fileset dir="${build.dir}/${archivePrefix}">
-                <include name="**/*" />
-            </fileset>
-		</copy>
-		
-		<delete dir="${build.dir}/${archivePrefix}" failonerror="false" />
+		<foreach param="file" target="update.version.repackage">
+			<fileset dir="${productPath}" includes="*.zip" />
+			<param name="build.dir" value="${build.dir}" />
+			<param name="productPath" value="${productPath}" />
+			<param name="archivePrefix" value="${archivePrefix}" />
+			<param name="product.conf.dir" value="${product.conf.dir}" />
+			<param name="distribute.dir" value="${distribute.dir}" />
+			
+			<param name="build.version" value="${build.version}" />
+			<param name="release.candidate" value="${release.candidate}" />
+			<param name="client.build.date" value="${client.build.date}" />
+			<param name="client.build.time" value="${client.build.time}" />
+			<param name="client.build.number" value="${client.build.number}" />
+		</foreach>
+	</target>
 
-		<copy todir="${build.dir}/configuration" overwrite="true">
+	<!-- =================================
+          target: update.version.repackage
+         ================================= -->
+	<target name="update.version.repackage" description="Updates the version property files and repackages the client.">
+		<echo message="UPDATE.VERSION.REPACKAGE: ${file}" />
+		<delete dir="${build.dir}" failonerror="false" />
+		<mkdir dir="${build.dir}" />
+
+		<unzip dest="${build.dir}" src="${file}" />
+
+		<copy todir="${build.dir}/${archivePrefix}/configuration" overwrite="true">
 			<fileset dir="${product.conf.dir}">
 				<include name="config.ini" />
 			</fileset>
@@ -108,7 +108,7 @@
 			</filterset>
 		</copy>
 
-		<copy tofile="${build.dir}/.eclipseproduct" overwrite="true">
+		<copy tofile="${build.dir}/${archivePrefix}/.eclipseproduct" overwrite="true">
 			<fileset dir="${product.conf.dir}">
 				<include name="_eclipseproduct" />
 			</fileset>
@@ -120,60 +120,49 @@
 				<filter token="BUILD_NUMBER" value="${client.build.number}" />
 			</filterset>
 		</copy>
-		<copy todir="${build.dir}" overwrite="true">
+		<!--copy todir="${build.dir}" overwrite="true">
 			<fileset dir="${product.conf.dir}">
-				<include name="sls.exe" />
+				<include name="EclipseLauncherX.exe" />
 			</fileset>
-		</copy>
+		</copy-->
 
-		<copy todir="${workspace}/com.weiglewilczek.xwt.launcher" overwrite="true">
-			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher/etc.temp">
-				<include name="plugin.xml" />
-			</fileset>
-		</copy>
-		<delete dir="${workspace}/com.weiglewilczek.xwt.launcher/etc.temp" />
-	</target>
+		<!-- ${productPath} must be an exact path without "/./" and "/../", because the file property holds an exact path 
+		bacause of this, workspace = basedir="/../", so the property workspace won't contain "/../"! -->
+		<propertyregex property="filename" input="${file}" regexp="${productPath}\/([a-zA-Z0-9\._\-]*)" select="\1" defaultvalue="Error" override="true" />
 
-	<!-- =================================
-          target: package.releng.results
-         ================================= -->
-	<target name="package.releng.results" depends="run.releng.build" description="Packages the client.">
-		<echo>PACKAGE.RELENG.RESULTS</echo>
-
-		<jar destfile="${distribute.dir}/${productName}">
-			<fileset dir="${build.dir}">
+		<jar destfile="${distribute.dir}/${filename}">
+			<fileset dir="${build.dir}/${archivePrefix}">
 				<include name="**/*" />
 			</fileset>
 		</jar>
 	</target>
 
-	
+
 	<!-- ================================= 
          target: clean              
     	 ================================= -->
 	<target name="clean" description="Cleans the project for building.">
 		<echo>CLEAN</echo>
-		
-		<delete dir="${build.dir}" failonerror="false"/>
-		
+
+		<delete dir="${build.dir}" failonerror="false" />
+
 		<delete failonerror="false">
 			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher">
-			    <include name="*.jar"/>
+				<include name="*.jar" />
 			</fileset>
 		</delete>
 		<delete dir="${workspace}/com.weiglewilczek.xwt.launcher/@dot" />
-		
+
 		<delete failonerror="false">
 			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher.feature">
-			    <include name="*.jar"/>
+				<include name="*.jar" />
 			</fileset>
 		</delete>
-		
+
 		<delete failonerror="false">
 			<fileset dir="${workspace}/com.weiglewilczek.xwt.launcher.eclipse.feature">
-			    <include name="*.jar"/>
+				<include name="*.jar" />
 			</fileset>
 		</delete>
 	</target>
-
 </project>

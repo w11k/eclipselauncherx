@@ -1,13 +1,11 @@
 .DS_Store
 .metadata
 com.weiglewilczek.xwt.launcher/bin
+com.weiglewilczek.xwt.launcher/src/xwt.launcher.version.properties
 com.weiglewilczek.xwt.launcher.build.tools/build
+com.weiglewilczek.xwt.launcher.build.tools/properties/version/buildnumber.client.properties
+com.weiglewilczek.xwt.launcher.build.tools/properties/version/xwt.launcher.version.properties
 com.weiglewilczek.eclipse.launcher/
 com.weiglewilczek.eclipse.launcherM5/
-com.weiglewilczek.eclipse.utils.ui.carbon/
-com.weiglewilczek.eclipse.utils.ui.win32/
-com.weiglewilczek.eclipse.utils.ui/
-com.weiglewilczek.utils/
 org.eclipse.e4.xwt_0.9.1.v20100905b/
-xwt.launcher.releng.buildoutput/
 com.weiglewilczek.xwt.launcher.releng.buildoutput/
