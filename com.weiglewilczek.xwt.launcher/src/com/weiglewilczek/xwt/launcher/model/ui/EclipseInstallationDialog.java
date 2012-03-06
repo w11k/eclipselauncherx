@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2012 WeigleWilczek and others.
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package com.weiglewilczek.xwt.launcher.model.ui;
 
 import java.net.URL;
@@ -31,12 +39,11 @@ public class EclipseInstallationDialog extends AbstractDialog {
 		FileDialog dialog = new FileDialog(getShell());
 		String path = dialog.open();
 		if (path != null && path.length() > 0) {
-			Text pathText = (Text) XWT.findElementByName(event.widget,
-					"path");
+			Text pathText = (Text) XWT.findElementByName(event.widget, "path");
 			if (pathText != null)
 				pathText.setText(path);
 		}
-		
+
 		IBindingContext context = XWT.getBindingContext(event.widget);
 		context.updateModels();
 	}

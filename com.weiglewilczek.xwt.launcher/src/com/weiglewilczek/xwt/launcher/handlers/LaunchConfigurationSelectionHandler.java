@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2012 WeigleWilczek and others.
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package com.weiglewilczek.xwt.launcher.handlers;
 
 import org.eclipse.e4.xwt.XWT;
@@ -35,8 +43,7 @@ public class LaunchConfigurationSelectionHandler {
 			final LaunchConfiguration launchConfiguration) {
 		final ComboViewer javaViewer = (ComboViewer) XWT.findElementByName(
 				referenceWidget, "java");
-		javaViewer
-		.addSelectionChangedListener(new ISelectionChangedListener() {
+		javaViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
@@ -44,8 +51,7 @@ public class LaunchConfigurationSelectionHandler {
 						.getSelection();
 				Object selected = selection.getFirstElement();
 
-				launchConfiguration
-						.setJava((JavaInstallation) selected);
+				launchConfiguration.setJava((JavaInstallation) selected);
 			}
 		});
 	}

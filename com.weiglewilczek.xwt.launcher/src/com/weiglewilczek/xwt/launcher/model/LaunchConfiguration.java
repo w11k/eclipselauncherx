@@ -1,17 +1,26 @@
+/*
+ * Copyright (c) 2012 WeigleWilczek and others.
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package com.weiglewilczek.xwt.launcher.model;
 
 import java.io.Serializable;
 
 import com.weiglewilczek.xwt.launcher.managers.LaunchConfigurationFields;
 
-public class LaunchConfiguration extends ModelElement<LaunchConfigurationFields> implements Serializable {
-	
+public class LaunchConfiguration extends
+		ModelElement<LaunchConfigurationFields> implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	
+
 	private String workspacePath;
-	
+
 	private EclipseInstallation eclipse;
 
 	private JavaInstallation java;
@@ -19,7 +28,7 @@ public class LaunchConfiguration extends ModelElement<LaunchConfigurationFields>
 	private String vmArgs;
 
 	private String eclipseArgs;
-	
+
 	public LaunchConfiguration(Long id, String name, String workspacePath,
 			EclipseInstallation eclipse, JavaInstallation java, String vmArgs,
 			String eclipseArgs) {
@@ -45,7 +54,7 @@ public class LaunchConfiguration extends ModelElement<LaunchConfigurationFields>
 
 	public LaunchConfiguration() {
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -61,7 +70,7 @@ public class LaunchConfiguration extends ModelElement<LaunchConfigurationFields>
 	public void setWorkspacePath(String workspacePath) {
 		this.workspacePath = workspacePath;
 	}
-	
+
 	public EclipseInstallation getEclipse() {
 		return eclipse;
 	}
@@ -96,19 +105,21 @@ public class LaunchConfiguration extends ModelElement<LaunchConfigurationFields>
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj != null && obj instanceof LaunchConfiguration)
-		{
+		if (obj != null && obj instanceof LaunchConfiguration) {
 			return super.equals(obj);
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	public String toString() {
-		return "LaunchConfiguration[id="+getId()+", name="+name+", workspace="+workspacePath+", eclipse="+eclipse.toString()+", java="+java.toString()+", vmArgs="+vmArgs+", eclipseArgs="+eclipseArgs+"]";
+		return "LaunchConfiguration[id=" + getId() + ", name=" + name
+				+ ", workspace=" + workspacePath + ", eclipse="
+				+ eclipse.toString() + ", java=" + java.toString()
+				+ ", vmArgs=" + vmArgs + ", eclipseArgs=" + eclipseArgs + "]";
 	}
-	
+
 	@Override
 	public Object getProperty(LaunchConfigurationFields field) {
 		switch (field) {
@@ -152,5 +163,5 @@ public class LaunchConfiguration extends ModelElement<LaunchConfigurationFields>
 			break;
 		}
 	}
-	
+
 }
