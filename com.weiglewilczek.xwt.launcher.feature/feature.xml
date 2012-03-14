@@ -24,4 +24,31 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="com.weiglewilczek.xwt.launcher.linux"
+         os="linux"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="com.weiglewilczek.xwt.launcher.macos"
+         os="macosx"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="com.weiglewilczek.xwt.launcher.win32"
+         os="win32"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
 </feature>

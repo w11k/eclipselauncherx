@@ -8,7 +8,6 @@
  */
 package com.weiglewilczek.xwt.launcher.handlers;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +15,13 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
-import com.weiglewilczek.xwt.launcher.util.Program;
+import com.weiglewilczek.xwt.launcher.util.ProgramFactory;
 
 public class Launch extends AbstractHandler {
 
@@ -30,31 +31,35 @@ public class Launch extends AbstractHandler {
 				.getCurrentSelection(event);
 		LaunchConfiguration selectedConfiguration = (LaunchConfiguration) selection
 				.getFirstElement();
-		runLaunchConfiguration(selectedConfiguration);
+		try {
+			runLaunchConfiguration(selectedConfiguration);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return null;
 	}
 
-	private void runLaunchConfiguration(LaunchConfiguration launchConfiguration) {
+	private void runLaunchConfiguration(LaunchConfiguration launchConfiguration)
+			throws Exception {
 		List<String> commands = new ArrayList<String>();
-		if (Platform.getOS().equals(Platform.OS_MACOSX)) {
-			String executableName = new File(launchConfiguration.getEclipse()
-					.getPathToExecutable()).getName();
-			executableName = executableName.substring(0,
-					executableName.indexOf("."));
-			commands.add(launchConfiguration.getEclipse().getPathToExecutable()
-					+ "/Contents/MacOS/" + executableName);
 
+		if (Platform.getOS().equals(Platform.OS_MACOSX)
+				|| Platform.getOS().equals(Platform.OS_LINUX)
+				|| Platform.getOS().equals(Platform.OS_WIN32)) {
 			if (launchConfiguration.getJava() != null) {
 				commands.add("-vm");
-				commands.add(launchConfiguration.getJava()
-						.getPathToExecutable());
+				commands.add("\""
+						+ launchConfiguration.getJava().getPathToExecutable()
+						+ "\"");
 			}
 
 			if (launchConfiguration.getWorkspacePath() != null
 					&& launchConfiguration.getWorkspacePath().length() > 0) {
 				commands.add("-data");
-				commands.add(launchConfiguration.getWorkspacePath());
+				commands.add("\"" + launchConfiguration.getWorkspacePath()
+						+ "\"");
 			}
 
 			if (launchConfiguration.getEclipseArgs() != null
@@ -68,10 +73,16 @@ public class Launch extends AbstractHandler {
 					&& launchConfiguration.getVmArgs().length() > 0) {
 				commands.add("-vmargs " + launchConfiguration.getVmArgs());
 			}
-		}
 
-		if (commands.size() > 0) {
-			new Program().execute(commands.toArray(new String[0]));
+			String[] command = commands.toArray(new String[0]);
+
+			ProgramFactory.execute("\""
+					+ launchConfiguration.getJava().getPathToExecutable()
+					+ "\"", command);
+		} else {
+			MessageDialog.openInformation(PlatformUI.getWorkbench()
+					.getActiveWorkbenchWindow().getShell(), "Launch",
+					"Error launching configuration: Platform not supported");
 		}
 	}
 

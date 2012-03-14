@@ -34,10 +34,7 @@
 				<exclude name="*.win32*/**" />
 			</fileset>
 			<fileset dir="${workspace}">
-				<include name="com.weiglewilczek.xwt.launcher/**" />
-				<include name="com.weiglewilczek.utils/**" />
-				<include name="com.weiglewilczek.eclipse.utils.*/**" />
-				<include name="com.weiglewilczek.eclipse.utils.ui.carbon/**" />
+				<include name="com.weiglewilczek.xwt.launcher*/**" />
 			</fileset>
 		</copy>
 		<copy todir="${buildDirectory}/features">

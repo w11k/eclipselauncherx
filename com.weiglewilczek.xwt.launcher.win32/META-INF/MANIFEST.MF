@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Win23
+Bundle-SymbolicName: com.weiglewilczek.xwt.launcher.win32
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: WEIGLEWILCZEK
+Fragment-Host: com.weiglewilczek.xwt.launcher;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Eclipse-PlatformFilter: (osgi.os=win32)
