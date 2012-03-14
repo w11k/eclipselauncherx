@@ -17,6 +17,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.PlatformUI;
 
 import com.weiglewilczek.xwt.launcher.Activator;
+import com.weiglewilczek.xwt.launcher.Messages;
 
 public class About extends AbstractHandler {
 
@@ -27,7 +28,7 @@ public class About extends AbstractHandler {
 			properties.load(getClass().getClassLoader().getResourceAsStream(
 					"xwt.launcher.version.properties"));
 		} catch (Exception e) {
-			Activator.logError("Error loading version properties", e);
+			Activator.logError(Messages.About_Error, e);
 		}
 
 		Object versionObject = properties.get("build.version");
@@ -43,14 +44,11 @@ public class About extends AbstractHandler {
 			}
 		}
 
-		MessageDialog
-				.openInformation(
-						PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-								.getShell(),
-						"About",
-						"EclipseLauncherX\n\nVersion: "
-								+ version
-								+ "\nAuthor: Daniela Blank\n\n(c) Copyright Weiglewilczek GmbH 2012. All rights reserved.\nVisit www.weiglewilczek.com");
+		MessageDialog.openInformation(PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getShell(), Messages.About_About,
+				"EclipseLauncherX\n\n" + Messages.About_Version + ": "
+						+ version + "\n" + Messages.About_Author
+						+ ": Daniela Blank\n\n" + Messages.About_Copyright);
 
 		return null;
 	}

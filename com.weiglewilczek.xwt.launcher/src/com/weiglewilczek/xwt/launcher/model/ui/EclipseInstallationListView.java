@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.handlers.IHandlerService;
 
 import com.weiglewilczek.xwt.launcher.Activator;
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.listener.IListener;
 import com.weiglewilczek.xwt.launcher.listener.ListenerType;
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
@@ -69,7 +70,7 @@ public class EclipseInstallationListView extends XWTViewPart implements
 								} catch (Exception e) {
 									Activator
 											.logError(
-													"Error executing command: Edit Eclipse Installation",
+													Messages.EclipseInstallationListView_Error,
 													e);
 								}
 							}

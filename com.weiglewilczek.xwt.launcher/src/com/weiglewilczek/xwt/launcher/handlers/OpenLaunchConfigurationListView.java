@@ -14,6 +14,8 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import com.weiglewilczek.xwt.launcher.Messages;
+
 public class OpenLaunchConfigurationListView extends AbstractHandler {
 
 	@Override
@@ -27,7 +29,7 @@ public class OpenLaunchConfigurationListView extends AbstractHandler {
 			// throw new
 			// ExecutionException("Error opening launch configuration list view",
 			// e);
-			throw new ExecutionException("Error opening groups view", e);
+			throw new ExecutionException(Messages.OpenLaunchConfigurationListView_Error, e);
 		}
 		return null;
 	}

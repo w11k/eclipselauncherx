@@ -14,6 +14,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.managers.GroupManager;
 import com.weiglewilczek.xwt.launcher.managers.LaunchConfigurationManager;
 import com.weiglewilczek.xwt.launcher.model.Group;
@@ -37,7 +38,7 @@ public class DeleteLaunchConfiguration extends AbstractHandler {
 			GroupManager.getInstance().update(group);
 		} catch (Exception e) {
 			throw new ExecutionException(
-					"Error deleting launch configuration: " + lc.getName(), e);
+					Messages.DeleteLaunchConfiguration_Error + lc.getName(), e);
 		}
 
 		return null;

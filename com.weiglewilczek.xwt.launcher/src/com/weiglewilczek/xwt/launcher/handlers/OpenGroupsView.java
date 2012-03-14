@@ -14,6 +14,8 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import com.weiglewilczek.xwt.launcher.Messages;
+
 public class OpenGroupsView extends AbstractHandler {
 
 	@Override
@@ -23,7 +25,7 @@ public class OpenGroupsView extends AbstractHandler {
 					.getActivePage()
 					.showView("com.weiglewilczek.xwt.launcher.views.Groups");
 		} catch (PartInitException e) {
-			throw new ExecutionException("Error opening groups view", e);
+			throw new ExecutionException(Messages.OpenGroupsView_Error, e);
 		}
 		return null;
 	}

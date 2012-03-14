@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.model.JavaInstallation;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 
@@ -78,7 +79,7 @@ public class JavaInstallationManager extends
 		for (LaunchConfiguration launchConfiguration : launchConfigurations) {
 			if (object.equals(launchConfiguration.getJava())) {
 				throw new ConstraintViolationException(
-						"The Java Installation cannot be delete. It is referenced by min. a Launch Configuration.");
+						Messages.JavaInstallationManager_ConstraintViolationException);
 			}
 		}
 

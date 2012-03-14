@@ -13,6 +13,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
 import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 import com.weiglewilczek.xwt.launcher.model.ui.EclipseInstallationDialog;
@@ -29,7 +30,7 @@ public class NewEclipseInstallation extends AbstractHandler {
 				EclipseInstallationManager.getInstance().create(eclipse);
 			} catch (Exception e) {
 				throw new ExecutionException(
-						"Error creating eclipse installation: "
+						Messages.NewEclipseInstallation_Error
 								+ eclipse.getName(), e);
 			}
 		}

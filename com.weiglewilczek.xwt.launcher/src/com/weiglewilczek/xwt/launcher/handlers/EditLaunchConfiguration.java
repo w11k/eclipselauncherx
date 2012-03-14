@@ -20,6 +20,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.weiglewilczek.xwt.launcher.Activator;
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
 import com.weiglewilczek.xwt.launcher.managers.JavaInstallationManager;
 import com.weiglewilczek.xwt.launcher.managers.LaunchConfigurationManager;
@@ -65,13 +66,15 @@ public class EditLaunchConfiguration extends AbstractHandler {
 								configuration);
 					} catch (Exception e) {
 						Activator.logError(
-								"Error updating Launch Configuration", e);
-						MessageDialog.openError(
-								PlatformUI.getWorkbench()
-										.getActiveWorkbenchWindow().getShell(),
-								"Edit Launch Configuration",
-								"Error updating Launch Configuration: "
-										+ e.getMessage());
+								Messages.EditLaunchConfiguration_Error, e);
+						MessageDialog
+								.openError(
+										PlatformUI.getWorkbench()
+												.getActiveWorkbenchWindow()
+												.getShell(),
+										Messages.EditLaunchConfiguration_EditLaunchConfiguration,
+										Messages.EditLaunchConfiguration_Error
+												+ ": " + e.getMessage());
 					}
 				}
 			}

@@ -5,6 +5,7 @@ com.weiglewilczek.xwt.launcher/src/xwt.launcher.version.properties
 com.weiglewilczek.xwt.launcher.linux/bin
 com.weiglewilczek.xwt.launcher.macos/bin
 com.weiglewilczek.xwt.launcher.win32/bin
+com.weiglewilczek.xwt.launcher.nl1/bin
 com.weiglewilczek.xwt.launcher.build.tools/build
 com.weiglewilczek.xwt.launcher.build.tools/properties/version/buildnumber.client.properties
 com.weiglewilczek.xwt.launcher.build.tools/properties/version/xwt.launcher.version.properties

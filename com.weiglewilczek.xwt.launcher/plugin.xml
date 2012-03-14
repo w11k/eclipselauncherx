@@ -26,28 +26,28 @@
             allowMultiple="false"
             class="com.weiglewilczek.xwt.launcher.model.ui.WorkspaceListView"
             id="com.weiglewilczek.xwt.launcher.views.LaunchConfigurations"
-            name="LaunchConfigurations"
+            name="%views.LaunchConfigurations"
             restorable="true">
       </view>
       <view
             allowMultiple="false"
             class="com.weiglewilczek.xwt.launcher.model.ui.EclipseInstallationListView"
             id="com.weiglewilczek.xwt.launcher.views.EclipseInstallations"
-            name="EclipseInstallations"
+            name="%views.EclipseInstallations"
             restorable="true">
       </view>
       <view
             allowMultiple="false"
             class="com.weiglewilczek.xwt.launcher.model.ui.JavaInstallationListView"
             id="com.weiglewilczek.xwt.launcher.views.JavaInstallations"
-            name="JavaInstallations"
+            name="%views.JavaInstallations"
             restorable="true">
       </view>
       <view
             allowMultiple="false"
             class="com.weiglewilczek.xwt.launcher.model.ui.GroupsView"
             id="com.weiglewilczek.xwt.launcher.views.Groups"
-            name="Groups"
+            name="%views.Groups"
             restorable="true">
       </view>
    </extension>
@@ -103,79 +103,83 @@
       <menuContribution
             locationURI="menu:org.eclipse.ui.main.menu">
          <menu
-               label="File">
+               label="%menus.File">
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.Import"
                   icon="icons/import.gif"
+                  label="%commands.Import"
                   style="push">
             </command>
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.Export"
                   icon="icons/export.gif"
+                  label="%commands.Export"
                   style="push">
             </command>
          </menu>
          <menu
-               label="Edit">
+               label="%menus.Edit">
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.New"
                   icon="icons/new.gif"
-                  label="New">
+                  label="%commands.New">
             </command>
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.CreateLauncher"
                   icon="icons/create_launcher.png"
-                  label="Create Launcher"
+                  label="%commands.CreateLauncher"
                   style="push">
             </command>
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.Edit"
                   icon="icons/edit.gif"
-                  label="Edit">
+                  label="%commands.Edit">
             </command>
             <command
                   commandId="org.eclipse.ui.edit.delete"
                   icon="icons/delete.gif"
-                  label="Delete"
+                  label="%commands.Delete"
                   style="push">
             </command>
          </menu>
          <menu
-               label="Launch">
+               label="%menus.Launch">
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.Launch"
                   icon="icons/run.png"
+                  label="%commands.Launch"
                   style="push">
             </command>
          </menu>
          <menu
-               label="Views">
+               label="%menus.Views">
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.OpenLaunchConfigurationListView"
                   icon="icons/launcher.png"
-                  label="Launch Configurations"
+                  label="%commands.LaunchConfigurations"
                   mode="FORCE_TEXT"
                   style="push">
             </command>
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.OpenEclipseInstallationListView"
                   icon="icons/eclipse.gif"
-                  label="Eclipse Installations"
+                  label="%commands.EclipseInstallations"
                   mode="FORCE_TEXT"
                   style="push">
             </command>
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.OpenJavaInstallationListView"
                   icon="icons/java.png"
-                  label="Java Installations"
+                  label="%commands.JavaInstallations"
                   mode="FORCE_TEXT"
                   style="push">
             </command>
          </menu>
          <menu
-               label="Help">
+               label="%menus.Help">
             <command
-                  commandId="org.eclipse.ui.help.aboutAction">
+                  commandId="org.eclipse.ui.help.aboutAction"
+                  label="%commands.About">
             </command>
          </menu>
       </menuContribution>
@@ -218,21 +222,21 @@
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.OpenLaunchConfigurationListView"
                   icon="icons/launcher.png"
-                  label="Launch Configurations"
+                  label="%commands.LaunchConfigurations"
                   mode="FORCE_TEXT"
                   style="push">
             </command>
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.OpenEclipseInstallationListView"
                   icon="icons/eclipse.gif"
-                  label="Eclipse Installations"
+                  label="%commands.EclipseInstallations"
                   mode="FORCE_TEXT"
                   style="push">
             </command>
             <command
                   commandId="com.weiglewilczek.xwt.launcher.commands.OpenJavaInstallationListView"
                   icon="icons/java.png"
-                  label="Java Installations"
+                  label="%commands.JavaInstallations"
                   mode="FORCE_TEXT"
                   style="push">
             </command>
@@ -243,39 +247,39 @@
          point="org.eclipse.ui.commands">
       <command
             id="com.weiglewilczek.xwt.launcher.commands.Edit"
-            name="Edit">
+            name="%commands.Edit">
       </command>
       <command
             id="com.weiglewilczek.xwt.launcher.commands.New"
-            name="New">
+            name="%commands.New">
       </command>
       <command
             id="com.weiglewilczek.xwt.launcher.commands.Launch"
-            name="Launch">
+            name="%commands.Launch">
       </command>
       <command
             id="com.weiglewilczek.xwt.launcher.commands.OpenLaunchConfigurationListView"
-            name="OpenLaunchConfigurationListView">
+            name="%commands.LaunchConfigurations">
       </command>
       <command
             id="com.weiglewilczek.xwt.launcher.commands.OpenEclipseInstallationListView"
-            name="OpenEclipseInstallationListView">
+            name="%commands.EclipseInstallations">
       </command>
       <command
             id="com.weiglewilczek.xwt.launcher.commands.OpenJavaInstallationListView"
-            name="OpenJavaInstallationListView">
+            name="%commands.JavaInstallations">
       </command>
       <command
             id="com.weiglewilczek.xwt.launcher.commands.CreateLauncher"
-            name="Create Launch Configuration">
+            name="%commands.CreateLauncher">
       </command>
       <command
             id="com.weiglewilczek.xwt.launcher.commands.Import"
-            name="Import from File">
+            name="%commands.Import">
       </command>
       <command
             id="com.weiglewilczek.xwt.launcher.commands.Export"
-            name="Export to File">
+            name="%commands.Export">
       </command>
    </extension>
    <extension
@@ -703,12 +707,6 @@
             id="com.weiglewilczek.xwt.launcher.keybindingscheme"
             name="com.weiglewilczek.xwt.launcher.keybindingscheme">
       </scheme>
-   </extension>
-   <extension
-         point="org.eclipse.core.runtime.preferences">
-      <initializer
-            class="com.weiglewilczek.xwt.launcher.managers.PreferenceInitializer">
-      </initializer>
    </extension>
 
 </plugin>

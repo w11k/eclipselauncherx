@@ -13,6 +13,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.managers.JavaInstallationManager;
 import com.weiglewilczek.xwt.launcher.model.JavaInstallation;
 import com.weiglewilczek.xwt.launcher.model.ui.JavaInstallationDialog;
@@ -29,7 +30,7 @@ public class NewJavaInstallation extends AbstractHandler {
 				JavaInstallationManager.getInstance().create(java);
 			} catch (Exception e) {
 				throw new ExecutionException(
-						"Error creating java installation: " + java.getName(),
+						Messages.NewJavaInstallation_Error + java.getName(),
 						e);
 			}
 		}

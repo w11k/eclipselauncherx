@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.handlers.LaunchConfigurationSelectionHandler;
 import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 import com.weiglewilczek.xwt.launcher.model.JavaInstallation;
@@ -35,7 +36,7 @@ public class LaunchConfigurationDialog extends AbstractDialog {
 
 	public LaunchConfigurationDialog(Shell shell,
 			LaunchConfigurationDataContext dataContext) {
-		super(shell, "New Launch Configuration", dataContext);
+		super(shell, Messages.LaunchConfigurationDialog_NewLaunchConfiguration, dataContext);
 	}
 
 	@Override

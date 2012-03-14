@@ -23,6 +23,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.weiglewilczek.xwt.launcher.Activator;
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
 import com.weiglewilczek.xwt.launcher.managers.GroupManager;
 import com.weiglewilczek.xwt.launcher.managers.JavaInstallationManager;
@@ -94,7 +95,8 @@ public class NewLaunchConfiguration extends AbstractHandler {
 										"com.weiglewilczek.xwt.launcher.views.Groups");
 					} catch (PartInitException e) {
 						throw new ExecutionException(
-								"Error opening groups view", e);
+								Messages.NewLaunchConfiguration_ErrorOpeningGroupsView,
+								e);
 					}
 
 				}
@@ -104,12 +106,12 @@ public class NewLaunchConfiguration extends AbstractHandler {
 				view.getTree().setSelection(
 						new StructuredSelection(configuration));
 			} catch (Exception e) {
-				Activator.logError("Error creating Launch Configuration", e);
+				Activator.logError(Messages.NewLaunchConfiguration_Error, e);
 				MessageDialog.openError(
 						PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 								.getShell(),
-						"New Launch Configuration",
-						"Error creating Launch Configuration: "
+						Messages.NewLaunchConfiguration_NewLaunchConfiguration,
+						Messages.NewLaunchConfiguration_Error + ": "
 								+ e.getMessage());
 			}
 		}

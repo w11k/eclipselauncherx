@@ -14,6 +14,8 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import com.weiglewilczek.xwt.launcher.Messages;
+
 public class OpenJavaInstallationListView extends AbstractHandler {
 
 	@Override
@@ -27,7 +29,7 @@ public class OpenJavaInstallationListView extends AbstractHandler {
 							"com.weiglewilczek.xwt.launcher.views.JavaInstallations");
 		} catch (PartInitException e) {
 			throw new ExecutionException(
-					"Error opening java installation list view", e);
+					Messages.OpenJavaInstallationListView_Error, e);
 		}
 		return null;
 	}

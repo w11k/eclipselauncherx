@@ -14,6 +14,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.managers.GroupManager;
 import com.weiglewilczek.xwt.launcher.model.Group;
 import com.weiglewilczek.xwt.launcher.model.ObservableGroup;
@@ -29,7 +30,7 @@ public class DeleteGroup extends AbstractHandler {
 		try {
 			GroupManager.getInstance().delete(group);
 		} catch (Exception e) {
-			throw new ExecutionException("Error deleting group: "
+			throw new ExecutionException(Messages.DeleteGroup_Error
 					+ group.getName(), e);
 		}
 

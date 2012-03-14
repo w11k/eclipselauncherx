@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.PlatformUI;
 
 import com.weiglewilczek.xwt.launcher.Activator;
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.managers.ImportExportManager;
 
 public class Export extends AbstractHandler {
@@ -46,15 +47,11 @@ public class Export extends AbstractHandler {
 								.exportProperties(file);
 					}
 				} catch (IOException e) {
-					Activator.logError("Error exporting configurations", e);
-					MessageDialog
-							.openError(
-									PlatformUI.getWorkbench()
-											.getActiveWorkbenchWindow()
-											.getShell(),
-									"Export",
-									"Error exporting configurations: "
-											+ e.getMessage());
+					Activator.logError(Messages.Export_Error, e);
+					MessageDialog.openError(PlatformUI.getWorkbench()
+							.getActiveWorkbenchWindow().getShell(),
+							Messages.Export_Export, Messages.Export_Error
+									+ ": " + e.getMessage());
 				}
 			}
 		}

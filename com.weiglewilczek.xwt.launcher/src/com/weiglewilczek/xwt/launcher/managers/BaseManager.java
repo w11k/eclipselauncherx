@@ -17,6 +17,7 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import com.weiglewilczek.xwt.launcher.Activator;
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.listener.IListener;
 import com.weiglewilczek.xwt.launcher.listener.ListenerType;
 import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
@@ -49,7 +50,7 @@ public abstract class BaseManager<T extends ModelElement<F>, F extends BaseField
 				properties.put(key, value);
 			}
 		} catch (BackingStoreException aEx) {
-			Activator.logError("Error loading preferences", aEx);
+			Activator.logError(Messages.BaseManager_Error, aEx);
 		}
 	}
 
@@ -201,7 +202,7 @@ public abstract class BaseManager<T extends ModelElement<F>, F extends BaseField
 						object.setProperty(field, configurations);
 					}
 				} else
-					System.out.println("warn: unknown type: "
+					System.out.println(Messages.BaseManager_WarningUnknownType
 							+ field.getTypeInstance().getClass());
 			}
 
@@ -271,7 +272,7 @@ public abstract class BaseManager<T extends ModelElement<F>, F extends BaseField
 						removeEntry(id + field.getName());
 					}
 				} else
-					System.out.println("warn: unknown type: "
+					System.out.println(Messages.BaseManager_WarningUnknownType
 							+ value.getClass());
 			} else {
 				removeEntry(id + field.getName());

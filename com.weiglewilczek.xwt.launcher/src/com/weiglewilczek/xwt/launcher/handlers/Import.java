@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.PlatformUI;
 
 import com.weiglewilczek.xwt.launcher.Activator;
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.managers.GroupManager;
 import com.weiglewilczek.xwt.launcher.managers.ImportExportManager;
 import com.weiglewilczek.xwt.launcher.model.Group;
@@ -45,15 +46,11 @@ public class Import extends AbstractHandler {
 					Group other = GroupManager.getInstance().get(-1l);
 					GroupManager.getInstance().update(other);
 				} catch (IOException e) {
-					Activator.logError("Error importing configurations", e);
-					MessageDialog
-							.openError(
-									PlatformUI.getWorkbench()
-											.getActiveWorkbenchWindow()
-											.getShell(),
-									"Import",
-									"Error importing configurations: "
-											+ e.getMessage());
+					Activator.logError(Messages.Import_Error, e);
+					MessageDialog.openError(PlatformUI.getWorkbench()
+							.getActiveWorkbenchWindow().getShell(),
+							Messages.Import_Import, Messages.Import_Error
+									+ ": " + e.getMessage());
 				}
 			}
 		}

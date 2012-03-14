@@ -13,12 +13,13 @@ import java.net.URL;
 import org.eclipse.e4.xwt.jface.AbstractDialog;
 import org.eclipse.swt.widgets.Shell;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.model.Group;
 
 public class GroupDialog extends AbstractDialog {
 
 	public GroupDialog(Shell shell, Group group) {
-		super(shell, "New Group", group);
+		super(shell, Messages.GroupDialog_NewGroup, group);
 	}
 
 	@Override

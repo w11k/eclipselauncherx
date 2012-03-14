@@ -18,12 +18,13 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.model.JavaInstallation;
 
 public class JavaInstallationDialog extends AbstractDialog {
 
 	public JavaInstallationDialog(Shell shell, JavaInstallation java) {
-		super(shell, "New Java Installation", java);
+		super(shell, Messages.JavaInstallationDialog_NewJavaInstallation, java);
 	}
 
 	@Override

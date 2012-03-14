@@ -16,6 +16,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.managers.ConstraintViolationException;
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
 import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
@@ -33,10 +34,11 @@ public class DeleteEclipseInstallation extends AbstractHandler {
 		} catch (ConstraintViolationException e) {
 			MessageDialog.openError(PlatformUI.getWorkbench()
 					.getActiveWorkbenchWindow().getShell(),
-					"Error deleting Eclipse installation", e.getMessage());
+					Messages.DeleteEclipseInstallation_Error, e.getMessage());
 		} catch (Exception e) {
 			throw new ExecutionException(
-					"Error deleting eclipse installation: " + ei.getName(), e);
+					Messages.DeleteEclipseInstallation_Error + ": "
+							+ ei.getName(), e);
 		}
 
 		return null;

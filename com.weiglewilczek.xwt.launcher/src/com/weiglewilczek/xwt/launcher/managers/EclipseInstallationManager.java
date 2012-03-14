@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 
@@ -80,7 +81,7 @@ public class EclipseInstallationManager extends
 		for (LaunchConfiguration launchConfiguration : launchConfigurations) {
 			if (object.equals(launchConfiguration.getEclipse())) {
 				throw new ConstraintViolationException(
-						"The Eclipse Installation cannot be delete. It is referenced by min. a Launch Configuration.");
+						Messages.EclipseInstallationManager_ConstraintViolationException);
 			}
 		}
 

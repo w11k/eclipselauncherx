@@ -17,6 +17,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.weiglewilczek.xwt.launcher.Activator;
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.managers.GroupManager;
 import com.weiglewilczek.xwt.launcher.model.Group;
 import com.weiglewilczek.xwt.launcher.model.ObservableGroup;
@@ -43,11 +44,13 @@ public class EditGroup extends AbstractHandler {
 					try {
 						GroupManager.getInstance().update(group);
 					} catch (Exception e) {
-						Activator.logError("Error updating Group", e);
-						MessageDialog.openError(PlatformUI.getWorkbench()
-								.getActiveWorkbenchWindow().getShell(),
-								"Edit Group",
-								"Error updating Group: " + e.getMessage());
+						Activator.logError(Messages.EditGroup_Error, e);
+						MessageDialog.openError(
+								PlatformUI.getWorkbench()
+										.getActiveWorkbenchWindow().getShell(),
+								Messages.EditGroup_EditGroup,
+								Messages.EditGroup_Error + ": "
+										+ e.getMessage());
 					}
 				}
 			}

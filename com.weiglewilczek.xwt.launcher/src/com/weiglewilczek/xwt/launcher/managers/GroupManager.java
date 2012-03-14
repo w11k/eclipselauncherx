@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.model.Group;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 
@@ -26,14 +27,14 @@ public class GroupManager extends BaseManager<Group, GroupFields> {
 		super();
 		otherGroup = new Group();
 		otherGroup.setId(-1l);
-		otherGroup.setName("Others");
+		otherGroup.setName(Messages.GroupManager_Others);
 	}
 
 	public GroupManager(ManagerContext contextType, Properties properties) {
 		super(contextType, properties);
 		otherGroup = new Group();
 		otherGroup.setId(-1l);
-		otherGroup.setName("Others");
+		otherGroup.setName(Messages.GroupManager_Others);
 
 		instances.put(contextType, this);
 	}

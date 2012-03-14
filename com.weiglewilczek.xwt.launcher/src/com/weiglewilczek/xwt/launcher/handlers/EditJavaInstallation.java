@@ -14,6 +14,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.managers.JavaInstallationManager;
 import com.weiglewilczek.xwt.launcher.model.JavaInstallation;
 import com.weiglewilczek.xwt.launcher.model.ui.JavaInstallationDialog;
@@ -33,7 +34,7 @@ public class EditJavaInstallation extends AbstractHandler {
 				JavaInstallationManager.getInstance().update(java);
 			} catch (Exception e) {
 				throw new ExecutionException(
-						"Error updating java installation: " + java.getName(),
+						Messages.EditJavaInstallation_Error + java.getName(),
 						e);
 			}
 		}

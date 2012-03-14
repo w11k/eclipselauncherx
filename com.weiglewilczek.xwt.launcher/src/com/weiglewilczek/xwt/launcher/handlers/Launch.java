@@ -21,6 +21,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.weiglewilczek.xwt.launcher.Activator;
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 import com.weiglewilczek.xwt.launcher.util.ProgramFactory;
 
@@ -35,10 +36,11 @@ public class Launch extends AbstractHandler {
 		try {
 			runLaunchConfiguration(selectedConfiguration);
 		} catch (Exception e) {
-			Activator.logError("Error launching configuration", e);
+			Activator.logError(Messages.Launch_Error, e);
 			MessageDialog.openInformation(PlatformUI.getWorkbench()
-					.getActiveWorkbenchWindow().getShell(), "Launch",
-					"Error launching configuration: " + e.getMessage());
+					.getActiveWorkbenchWindow().getShell(),
+					Messages.Launch_Launch,
+					Messages.Launch_Error + ": " + e.getMessage());
 		}
 
 		return null;
@@ -84,8 +86,8 @@ public class Launch extends AbstractHandler {
 					+ "\"", command);
 		} else {
 			MessageDialog.openInformation(PlatformUI.getWorkbench()
-					.getActiveWorkbenchWindow().getShell(), "Launch",
-					"Error launching configuration: Platform not supported");
+					.getActiveWorkbenchWindow().getShell(),
+					Messages.Launch_Launch, Messages.Launch_PlatformError);
 		}
 	}
 

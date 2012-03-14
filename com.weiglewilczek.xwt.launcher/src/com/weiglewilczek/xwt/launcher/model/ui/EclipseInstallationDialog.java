@@ -18,12 +18,13 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.weiglewilczek.xwt.launcher.Messages;
 import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 
 public class EclipseInstallationDialog extends AbstractDialog {
 
 	public EclipseInstallationDialog(Shell shell, EclipseInstallation eclipse) {
-		super(shell, "New Eclipse Installation", eclipse);
+		super(shell, Messages.EclipseInstallationDialog_NewEclipseInstallation, eclipse);
 	}
 
 	@Override
