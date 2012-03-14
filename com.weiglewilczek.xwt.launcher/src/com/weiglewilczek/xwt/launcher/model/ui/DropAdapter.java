@@ -45,43 +45,37 @@ public class DropAdapter extends ViewerDropAdapter {
 				}
 			}
 
-			try {
-				Group targetGroup = null;
-				if (getCurrentTarget() instanceof ObservableGroup) {
-					targetGroup = ((ObservableGroup) getCurrentTarget())
-							.getGroup();
-				} else if (getCurrentTarget() instanceof LaunchConfiguration) {
-					LaunchConfiguration targetConfiguration = (LaunchConfiguration) getCurrentTarget();
-					targetGroup = GroupManager.getInstance()
-							.getGroupForConfiguration(targetConfiguration);
-				}
+			Group targetGroup = null;
+			if (getCurrentTarget() instanceof ObservableGroup) {
+				targetGroup = ((ObservableGroup) getCurrentTarget()).getGroup();
+			} else if (getCurrentTarget() instanceof LaunchConfiguration) {
+				LaunchConfiguration targetConfiguration = (LaunchConfiguration) getCurrentTarget();
+				targetGroup = GroupManager.getInstance()
+						.getGroupForConfiguration(targetConfiguration);
+			}
 
-				if (targetGroup != null) {
-					for (LaunchConfiguration configuration : dragSource) {
-						if (!targetGroup.equals(GroupManager.getInstance()
-								.getGroupForConfiguration(configuration))) {
-							Group group = GroupManager.getInstance()
-									.getGroupForConfiguration(configuration);
-							group.removeConfiguration(configuration);
+			if (targetGroup != null) {
+				for (LaunchConfiguration configuration : dragSource) {
+					if (!targetGroup.equals(GroupManager.getInstance()
+							.getGroupForConfiguration(configuration))) {
+						Group group = GroupManager.getInstance()
+								.getGroupForConfiguration(configuration);
+						group.removeConfiguration(configuration);
+						GroupManager.getInstance().update(group);
+
+						targetGroup.addConfiguration(configuration);
+						GroupManager.getInstance().update(targetGroup);
+
+						// refresh second time at last, so the draged
+						// config, that is not stored but calculated!, is
+						// removed from group in ui
+						if (group.getId() == -1) {
 							GroupManager.getInstance().update(group);
-
-							targetGroup.addConfiguration(configuration);
-							GroupManager.getInstance().update(targetGroup);
-
-							// refresh second time at last, so the draged
-							// config, that is not stored but calculated!, is
-							// removed from group in ui
-							if (group.getId() == -1) {
-								GroupManager.getInstance().update(group);
-							}
 						}
 					}
-
-					return true;
 				}
-			} catch (Exception e) {
-				// TODO handle
-				e.printStackTrace();
+
+				return true;
 			}
 		}
 

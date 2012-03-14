@@ -14,9 +14,12 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.weiglewilczek.xwt.launcher.Activator;
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
 import com.weiglewilczek.xwt.launcher.managers.JavaInstallationManager;
 import com.weiglewilczek.xwt.launcher.managers.LaunchConfigurationManager;
@@ -61,8 +64,14 @@ public class EditLaunchConfiguration extends AbstractHandler {
 						LaunchConfigurationManager.getInstance().update(
 								configuration);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						Activator.logError(
+								"Error updating Launch Configuration", e);
+						MessageDialog.openError(
+								PlatformUI.getWorkbench()
+										.getActiveWorkbenchWindow().getShell(),
+								"Edit Launch Configuration",
+								"Error updating Launch Configuration: "
+										+ e.getMessage());
 					}
 				}
 			}

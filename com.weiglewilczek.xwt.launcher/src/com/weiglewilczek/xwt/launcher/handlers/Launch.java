@@ -20,6 +20,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.weiglewilczek.xwt.launcher.Activator;
 import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
 import com.weiglewilczek.xwt.launcher.util.ProgramFactory;
 
@@ -34,8 +35,10 @@ public class Launch extends AbstractHandler {
 		try {
 			runLaunchConfiguration(selectedConfiguration);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Activator.logError("Error launching configuration", e);
+			MessageDialog.openInformation(PlatformUI.getWorkbench()
+					.getActiveWorkbenchWindow().getShell(), "Launch",
+					"Error launching configuration: " + e.getMessage());
 		}
 
 		return null;

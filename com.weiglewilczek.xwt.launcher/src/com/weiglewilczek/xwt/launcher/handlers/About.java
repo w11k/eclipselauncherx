@@ -16,6 +16,8 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.PlatformUI;
 
+import com.weiglewilczek.xwt.launcher.Activator;
+
 public class About extends AbstractHandler {
 
 	@Override
@@ -25,8 +27,7 @@ public class About extends AbstractHandler {
 			properties.load(getClass().getClassLoader().getResourceAsStream(
 					"xwt.launcher.version.properties"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Activator.logError("Error loading version properties", e);
 		}
 
 		Object versionObject = properties.get("build.version");

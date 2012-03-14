@@ -17,6 +17,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.handlers.IHandlerService;
 
+import com.weiglewilczek.xwt.launcher.Activator;
 import com.weiglewilczek.xwt.launcher.listener.IListener;
 import com.weiglewilczek.xwt.launcher.listener.ListenerType;
 import com.weiglewilczek.xwt.launcher.managers.JavaInstallationManager;
@@ -65,8 +66,10 @@ public class JavaInstallationListView extends XWTViewPart implements IListener {
 											"com.weiglewilczek.xwt.launcher.commands.Edit",
 											null);
 								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+									Activator
+											.logError(
+													"Error executing command: Edit Java Installation",
+													e);
 								}
 							}
 						});

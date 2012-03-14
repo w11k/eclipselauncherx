@@ -16,9 +16,6 @@ import java.util.Properties;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-
 import com.weiglewilczek.xwt.launcher.Activator;
 import com.weiglewilczek.xwt.launcher.listener.IListener;
 import com.weiglewilczek.xwt.launcher.listener.ListenerType;
@@ -52,11 +49,7 @@ public abstract class BaseManager<T extends ModelElement<F>, F extends BaseField
 				properties.put(key, value);
 			}
 		} catch (BackingStoreException aEx) {
-			Activator
-					.getDefault()
-					.getLog()
-					.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-							"error loading preferences", aEx));
+			Activator.logError("Error loading preferences", aEx);
 		}
 	}
 

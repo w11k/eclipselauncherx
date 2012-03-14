@@ -14,10 +14,12 @@ import java.io.IOException;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.PlatformUI;
 
+import com.weiglewilczek.xwt.launcher.Activator;
 import com.weiglewilczek.xwt.launcher.managers.GroupManager;
 import com.weiglewilczek.xwt.launcher.managers.ImportExportManager;
 import com.weiglewilczek.xwt.launcher.model.Group;
@@ -43,8 +45,15 @@ public class Import extends AbstractHandler {
 					Group other = GroupManager.getInstance().get(-1l);
 					GroupManager.getInstance().update(other);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Activator.logError("Error importing configurations", e);
+					MessageDialog
+							.openError(
+									PlatformUI.getWorkbench()
+											.getActiveWorkbenchWindow()
+											.getShell(),
+									"Import",
+									"Error importing configurations: "
+											+ e.getMessage());
 				}
 			}
 		}

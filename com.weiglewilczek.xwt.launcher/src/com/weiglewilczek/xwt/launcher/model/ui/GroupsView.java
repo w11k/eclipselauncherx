@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.handlers.IHandlerService;
 
+import com.weiglewilczek.xwt.launcher.Activator;
 import com.weiglewilczek.xwt.launcher.listener.IListener;
 import com.weiglewilczek.xwt.launcher.listener.ListenerType;
 import com.weiglewilczek.xwt.launcher.managers.EclipseInstallationManager;
@@ -94,8 +95,10 @@ public class GroupsView extends XWTViewPart implements IListener {
 										"com.weiglewilczek.xwt.launcher.commands.Launch",
 										null);
 							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+								Activator
+										.logError(
+												"Error executing command: Launch Configuration",
+												e);
 							}
 						} else if (selection != null
 								&& selection instanceof IStructuredSelection
@@ -108,8 +111,9 @@ public class GroupsView extends XWTViewPart implements IListener {
 										"com.weiglewilczek.xwt.launcher.commands.Edit",
 										null);
 							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+								Activator.logError(
+										"Error executing command: Edit Group",
+										e);
 							}
 						}
 					}
