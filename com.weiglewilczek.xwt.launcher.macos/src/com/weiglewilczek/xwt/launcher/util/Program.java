@@ -11,25 +11,21 @@ package com.weiglewilczek.xwt.launcher.util;
 
 import java.io.File;
 
-import org.eclipse.swt.SWT;
+import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 
-public class Program implements IProgram {
+public class Program extends AbstractProgram {
 
 	@Override
-	public void execute(String executable, String[] args) throws Exception {
-		if (executable == null || args == null) {
-			SWT.error(SWT.ERROR_NULL_ARGUMENT);
-		}
+	protected String[] getExecutionCommand(EclipseInstallation eclipse) {
+		String[] commands = new String[1];
 
-		String[] commands = new String[args.length + 1];
-
-		String executableName = new File(executable).getName();
+		String executableName = new File(eclipse.getPathToExecutable())
+				.getName().toLowerCase();
 		executableName = executableName.substring(0,
 				executableName.indexOf("."));
-		commands[0] = ("\"" + executable + "\"" + "/Contents/MacOS/" + executableName);
-
-		System.arraycopy(args, 0, commands, 1, args.length);
-
-		Runtime.getRuntime().exec(commands);
+		// TODO: don't escape paths without whitespaces: path is
+		// not recognized, test paths with whitespaces
+		commands[0] = (eclipse.getPathToExecutable() + "/Contents/MacOS/" + executableName);
+		return commands;
 	}
 }

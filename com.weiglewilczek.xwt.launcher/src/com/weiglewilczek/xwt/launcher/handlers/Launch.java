@@ -8,9 +8,6 @@
  */
 package com.weiglewilczek.xwt.launcher.handlers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -48,42 +45,10 @@ public class Launch extends AbstractHandler {
 
 	private void runLaunchConfiguration(LaunchConfiguration launchConfiguration)
 			throws Exception {
-		List<String> commands = new ArrayList<String>();
-
 		if (Platform.getOS().equals(Platform.OS_MACOSX)
 				|| Platform.getOS().equals(Platform.OS_LINUX)
 				|| Platform.getOS().equals(Platform.OS_WIN32)) {
-			if (launchConfiguration.getJava() != null) {
-				commands.add("-vm");
-				commands.add("\""
-						+ launchConfiguration.getJava().getPathToExecutable()
-						+ "\"");
-			}
-
-			if (launchConfiguration.getWorkspacePath() != null
-					&& launchConfiguration.getWorkspacePath().length() > 0) {
-				commands.add("-data");
-				commands.add("\"" + launchConfiguration.getWorkspacePath()
-						+ "\"");
-			}
-
-			if (launchConfiguration.getEclipseArgs() != null
-					&& launchConfiguration.getEclipseArgs().length() > 0) {
-				commands.add(launchConfiguration.getEclipseArgs());
-			}
-
-			commands.add("-showlocation");
-
-			if (launchConfiguration.getVmArgs() != null
-					&& launchConfiguration.getVmArgs().length() > 0) {
-				commands.add("-vmargs " + launchConfiguration.getVmArgs());
-			}
-
-			String[] command = commands.toArray(new String[0]);
-
-			ProgramFactory.execute("\""
-					+ launchConfiguration.getJava().getPathToExecutable()
-					+ "\"", command);
+			ProgramFactory.execute(launchConfiguration);
 		} else {
 			MessageDialog.openInformation(PlatformUI.getWorkbench()
 					.getActiveWorkbenchWindow().getShell(),

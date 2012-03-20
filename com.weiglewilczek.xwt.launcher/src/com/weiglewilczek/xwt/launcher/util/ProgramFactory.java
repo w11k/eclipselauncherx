@@ -8,6 +8,8 @@
  */
 package com.weiglewilczek.xwt.launcher.util;
 
+import com.weiglewilczek.xwt.launcher.model.LaunchConfiguration;
+
 /**
  * Factory class creating an instance of and OS dependent implementation of
  * IProgram and calls the execute method on it.
@@ -15,11 +17,11 @@ package com.weiglewilczek.xwt.launcher.util;
  * @author danielablank
  */
 public class ProgramFactory {
-	public static void execute(String executable, String[] args)
+	public static void execute(LaunchConfiguration configuration)
 			throws Exception {
 		IProgram program = (IProgram) ProgramFactory.class.getClassLoader()
 				.loadClass("com.weiglewilczek.xwt.launcher.util.Program")
 				.newInstance();
-		program.execute(executable, args);
+		program.execute(configuration);
 	}
 }

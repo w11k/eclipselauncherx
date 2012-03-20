@@ -8,22 +8,16 @@
  */
 package com.weiglewilczek.xwt.launcher.util;
 
-import org.eclipse.swt.SWT;
+import com.weiglewilczek.xwt.launcher.model.EclipseInstallation;
 
-public class Program implements IProgram {
+public class Program extends AbstractProgram {
 
 	@Override
-	public void execute(String executable, String[] args) throws Exception {
-		if (executable == null || args == null) {
-			SWT.error(SWT.ERROR_NULL_ARGUMENT);
-		}
-
-		String[] commands = new String[args.length + 2];
+	protected String[] getExecutionCommand(EclipseInstallation eclipse) {
+		String[] commands = new String[3];
 		commands[0] = "sh";
 		commands[1] = "-c";
-
-		System.arraycopy(args, 0, commands, 2, args.length);
-
-		Runtime.getRuntime().exec("sh");
+		commands[2] = "\"" + eclipse.getPathToExecutable() + "\"";
+		return commands;
 	}
 }
