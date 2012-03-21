@@ -14,10 +14,13 @@ public class Program extends AbstractProgram {
 
 	@Override
 	protected String[] getExecutionCommand(EclipseInstallation eclipse) {
-		String[] commands = new String[3];
-		commands[0] = "sh";
-		commands[1] = "-c";
-		commands[2] = "\"" + eclipse.getPathToExecutable() + "\"";
+		// String[] commands = new String[3];
+		// commands[0] = "sh";
+		// commands[1] = "-c";
+		// commands[2] = "\"" + eclipse.getPathToExecutable() + "\"";
+
+		String[] commands = new String[1];
+		commands[0] = "\"" + eclipse.getPathToExecutable() + "\"";
 		return commands;
 	}
 }

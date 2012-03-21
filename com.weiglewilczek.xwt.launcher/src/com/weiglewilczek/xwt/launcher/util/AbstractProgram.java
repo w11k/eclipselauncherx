@@ -45,18 +45,11 @@ public abstract class AbstractProgram implements IProgram {
 		if (configuration.getJava() != null) {
 			commands.add("-vm");
 			commands.add(configuration.getJava().getPathToExecutable());
-			// TODO: don't escape paths without whitespaces for macos: path is
-			// not recognized, test paths with whitespaces
-			// commands.add("\"" + configuration.getJava().getPathToExecutable()
-			// + "\"");
 		}
 
 		if (configuration.getWorkspacePath() != null
 				&& configuration.getWorkspacePath().length() > 0) {
 			commands.add("-data");
-			// TODO: don't escape paths without whitespaces for macos: path is
-			// treaten as relative to eclipse, test paths with whitespaces
-			// commands.add("\"" + configuration.getWorkspacePath() + "\"");
 			commands.add(configuration.getWorkspacePath());
 		}
 

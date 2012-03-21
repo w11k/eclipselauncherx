@@ -23,8 +23,6 @@ public class Program extends AbstractProgram {
 				.getName().toLowerCase();
 		executableName = executableName.substring(0,
 				executableName.indexOf("."));
-		// TODO: don't escape paths without whitespaces: path is
-		// not recognized, test paths with whitespaces
 		commands[0] = (eclipse.getPathToExecutable() + "/Contents/MacOS/" + executableName);
 		return commands;
 	}
