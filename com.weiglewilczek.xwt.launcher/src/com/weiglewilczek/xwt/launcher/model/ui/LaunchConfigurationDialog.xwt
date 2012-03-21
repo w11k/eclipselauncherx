@@ -1,12 +1,13 @@
 <Composite xmlns="http://www.eclipse.org/xwt/presentation"
 	xmlns:x="http://www.eclipse.org/xwt" xmlns:c="clr-namespace:com.weiglewilczek.eclipse.launcher.model"
 	xmlns:j="clr-namespace:java.lang" xmlns:jface="clr-namespace:org.eclipse.e4.xwt.jface"
+	xmlns:m="clr-namespace:com.weiglewilczek.xwt.launcher"
 	x:Class="com.weiglewilczek.xwt.launcher.model.ui.LaunchConfigurationDialog"
 	xmlns:widgets="clr-namespace:com.weiglewilczek.eclipse.launcher.widgets">
 	<Composite.layout>
 		<GridLayout numColumns="2" horizontalSpacing="10" />
 	</Composite.layout>
-	<Label text="Configuration Name:" >
+	<Label text="{x:Static m:Messages.LaunchConfigurationDialog_ConfigurationName}" >
 	<Label.layoutData>
 			<GridData horizontalSpan="2" />
 		</Label.layoutData>
@@ -17,7 +18,7 @@
 				horizontalAlignment="GridData.FILL" widthHint="450" horizontalSpan="2" />
 		</Text.layoutData>
 	</Text>
-	<Label text="Path to Eclipse Executable:" >
+	<Label text="{x:Static m:Messages.LaunchConfigurationDialog_PathToEclipseExecutable}" >
 	<Label.layoutData>
 			<GridData horizontalSpan="2" />
 		</Label.layoutData>
@@ -36,7 +37,7 @@
 		</ComboViewer.control.layoutData>
 		<ComboViewer.control></ComboViewer.control>
 	</ComboViewer>
-	<Label text="Path to Eclipse Workspace:" >
+	<Label text="{x:Static m:Messages.LaunchConfigurationDialog_PathToEclipseWorkspace}" >
 	<Label.layoutData>
 			<GridData horizontalSpan="2" />
 		</Label.layoutData>
@@ -49,7 +50,7 @@
 	</Text>
 	<Button x:Style="Border" text="..." SelectionEvent="performSelectionEvent">
 	</Button>
-	<Label text="Optional Eclipse Parameter:" >
+	<Label text="{x:Static m:Messages.LaunchConfigurationDialog_OptionalEclipseParameter}" >
 	<Label.layoutData>
 			<GridData horizontalSpan="2" />
 		</Label.layoutData>
@@ -60,7 +61,7 @@
 				horizontalAlignment="GridData.FILL" widthHint="450" horizontalSpan="2" />
 		</Text.layoutData>
 	</Text>
-	<Label text="Eclipse Java VM:" >
+	<Label text="{x:Static m:Messages.LaunchConfigurationDialog_EclipseJavaVm}" >
 	<Label.layoutData>
 			<GridData horizontalSpan="2" />
 		</Label.layoutData>
@@ -79,7 +80,7 @@
 		</ComboViewer.control.layoutData>
 		<ComboViewer.control></ComboViewer.control>
 	</ComboViewer>
-	<Label text="VM Parameter:" >
+	<Label text="{x:Static m:Messages.LaunchConfigurationDialog_VmParameter}" >
 	<Label.layoutData>
 			<GridData horizontalSpan="2" />
 		</Label.layoutData>

@@ -2,19 +2,20 @@
 	xmlns:x="http://www.eclipse.org/xwt"
 	xmlns:y="clr-namespace:com.weiglewilczek.xwt.launcher.model.ui"
 	xmlns:j="clr-namespace:java.lang"
+	xmlns:m="clr-namespace:com.weiglewilczek.xwt.launcher"
 	x:Class="com.weiglewilczek.xwt.launcher.workspacelist.JavaInstallationListView">
 	<Composite.layout>
 		<GridLayout numColumns="1" />
 	</Composite.layout>
-	<TableViewer width="600" height="400" input="{Binding path=javaInstallations}" name="javaInstallationsList">
+	<TableViewer width="600" height="400" input="{Binding path=javaInstallations}" name="javaInstallationsList"  x:Style="FULL_SELECTION">
 		<TableViewer.control.layoutdata>
 			<GridData horizontalAlignment="FILL"
 				grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true"
 				verticalAlignment="FILL"></GridData>
 		</TableViewer.control.layoutdata>
 		<TableViewer.columns>
-			<TableViewerColumn text="Eclipse" width="200" property="name"/>
-			<TableViewerColumn text="Path" width="400" property="pathToExecutable"/>
+			<TableViewerColumn text="{x:Static m:Messages.JavaInstallationListView_Eclipse}" width="200" property="name"/>
+			<TableViewerColumn text="{x:Static m:Messages.JavaInstallationListView_Path}" width="400" property="pathToExecutable"/>
 		</TableViewer.columns>
 		<TableViewer.table headerVisible="true"/>
 		<TableViewer.labelProvider>

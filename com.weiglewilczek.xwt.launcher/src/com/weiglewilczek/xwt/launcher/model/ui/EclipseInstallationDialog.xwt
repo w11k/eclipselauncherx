@@ -1,18 +1,19 @@
 <Composite xmlns="http://www.eclipse.org/xwt/presentation"
 	xmlns:x="http://www.eclipse.org/xwt" xmlns:c="clr-namespace:com.weiglewilczek.eclipse.launcher.model.ui"
 	xmlns:j="clr-namespace:java.lang"
+	xmlns:m="clr-namespace:com.weiglewilczek.xwt.launcher"
 	x:Class="com.weiglewilczek.xwt.launcher.model.ui.EclipseInstallationDialog">
 	<Composite.layout>
 		<GridLayout numColumns="3" />
 	</Composite.layout>
-	<Label text="Name:" alignment="RIGHT" />
+	<Label text="{x:Static m:Messages.EclipseInstallationDialog_Name}" alignment="RIGHT" />
 	<Text x:Style="Border" text="{Binding path=name, updateSourceTrigger=PropertyChanged}">
 		<Text.layoutData>
 			<GridData grabExcessHorizontalSpace="true"
 				horizontalAlignment="GridData.FILL" widthHint="300" horizontalSpan="2" />
 		</Text.layoutData>
 	</Text>
-	<Label text="Path to executable:" />
+	<Label text="{x:Static m:Messages.EclipseInstallationDialog_PathToExecutable}" />
 	<Text x:Style="Border" text="{Binding path=pathToExecutable, updateSourceTrigger=PropertyChanged}" name="path">
 		<Text.layoutData>
 			<GridData grabExcessHorizontalSpace="true"

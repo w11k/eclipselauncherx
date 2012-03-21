@@ -72,6 +72,7 @@ public class WorkspaceListView extends ViewPart implements IListener {
 					"configurationColumn");
 			if (table != null && table instanceof TableViewer) {
 				workspaceList = (TableViewer) table;
+				workspaceList.getTable().setLinesVisible(true);
 				getSite().setSelectionProvider(workspaceList);
 
 				workspaceList

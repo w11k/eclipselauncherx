@@ -72,6 +72,7 @@ public class GroupsView extends XWTViewPart implements IListener {
 				Object nameColumn = XWT.findElementByName(xwtContext,
 						"nameColumn");
 				groupsViewer.getTree().setHeaderVisible(true);
+				groupsViewer.getTree().setLinesVisible(true);
 				ObservableListTreeContentProvider contentProvider = new ObservableListTreeContentProvider(
 						new GroupsObservableFactory(), null);
 				groupsViewer.setContentProvider(contentProvider);
@@ -96,10 +97,8 @@ public class GroupsView extends XWTViewPart implements IListener {
 										"com.weiglewilczek.xwt.launcher.commands.Launch",
 										null);
 							} catch (Exception e) {
-								Activator
-										.logError(
-												Messages.GroupsView_LaunchingError,
-												e);
+								Activator.logError(
+										Messages.GroupsView_LaunchingError, e);
 							}
 						} else if (selection != null
 								&& selection instanceof IStructuredSelection
@@ -113,8 +112,7 @@ public class GroupsView extends XWTViewPart implements IListener {
 										null);
 							} catch (Exception e) {
 								Activator.logError(
-										Messages.GroupsView_EditError,
-										e);
+										Messages.GroupsView_EditError, e);
 							}
 						}
 					}

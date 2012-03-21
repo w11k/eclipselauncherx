@@ -1,11 +1,12 @@
 <Composite xmlns="http://www.eclipse.org/xwt/presentation"
 	xmlns:x="http://www.eclipse.org/xwt" xmlns:c="clr-namespace:com.weiglewilczek.eclipse.launcher.model.ui"
 	xmlns:j="clr-namespace:java.lang"
+	xmlns:m="clr-namespace:com.weiglewilczek.xwt.launcher"
 	x:Class="com.weiglewilczek.xwt.launcher.model.ui.GroupDialog">
 	<Composite.layout>
 		<GridLayout numColumns="3" />
 	</Composite.layout>
-	<Label text="Name:" alignment="RIGHT" />
+	<Label text="{x:Static m:Messages.GroupDialog_Name}" alignment="RIGHT" />
 	<Text x:Style="Border" text="{Binding path=name, updateSourceTrigger=PropertyChanged}">
 		<Text.layoutData>
 			<GridData grabExcessHorizontalSpace="true"

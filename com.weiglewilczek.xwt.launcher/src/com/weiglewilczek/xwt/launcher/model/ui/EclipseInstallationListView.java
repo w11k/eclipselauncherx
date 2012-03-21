@@ -54,6 +54,7 @@ public class EclipseInstallationListView extends XWTViewPart implements
 				Control xwtContext = container.getChildren()[0];
 				eclipseInstallations = (TableViewer) XWT.findElementByName(
 						xwtContext, "eclipseInstallationsList");
+				eclipseInstallations.getTable().setLinesVisible(true);
 				getSite().setSelectionProvider(eclipseInstallations);
 
 				eclipseInstallations

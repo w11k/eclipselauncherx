@@ -53,6 +53,7 @@ public class JavaInstallationListView extends XWTViewPart implements IListener {
 				Control xwtContext = container.getChildren()[0];
 				javaInstallations = (TableViewer) XWT.findElementByName(
 						xwtContext, "javaInstallationsList");
+				javaInstallations.getTable().setLinesVisible(true);
 				getSite().setSelectionProvider(javaInstallations);
 
 				javaInstallations

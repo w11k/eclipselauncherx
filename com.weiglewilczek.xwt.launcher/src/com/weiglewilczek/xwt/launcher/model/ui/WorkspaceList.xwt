@@ -2,22 +2,23 @@
 	xmlns:x="http://www.eclipse.org/xwt"
 	xmlns:y="clr-namespace:com.weiglewilczek.xwt.launcher.model.ui"
 	xmlns:j="clr-namespace:java.lang"
+	xmlns:m="clr-namespace:com.weiglewilczek.xwt.launcher"
 	x:Class="com.weiglewilczek.xwt.launcher.workspacelist.WorkspaceList">
 	<Composite.layout>
 		<GridLayout numColumns="1" />
 	</Composite.layout>
-	<TableViewer width="600" height="400" input="{Binding path=launchConfigurations}" name="workspaceList">
+	<TableViewer width="600" height="400" input="{Binding path=launchConfigurations}" name="workspaceList" x:Style="FULL_SELECTION">
 		<TableViewer.control.layoutdata>
 			<GridData horizontalAlignment="FILL"
 				grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true"
 				verticalAlignment="FILL"></GridData>
 		</TableViewer.control.layoutdata>
 		<TableViewer.columns>
-			<TableViewerColumn text="Configuration" width="200" property="name" name="configurationColumn"/>
-			<TableViewerColumn text="Workspace" width="230" property="workspacePath"/>
-			<TableViewerColumn text="Eclipse" width="80" property="eclipse"/>
-			<TableViewerColumn text="Java" width="30" property="java"/>
-			<TableViewerColumn text="VM Parameters" width="85" property="vmArgs"/>
+			<TableViewerColumn text="{x:Static m:Messages.WorkspaceList_Configuration}" width="200" property="name" name="configurationColumn"/>
+			<TableViewerColumn text="{x:Static m:Messages.WorkspaceList_Workspace}" width="230" property="workspacePath"/>
+			<TableViewerColumn text="{x:Static m:Messages.WorkspaceList_Eclipse}" width="80" property="eclipse"/>
+			<TableViewerColumn text="{x:Static m:Messages.WorkspaceList_Java}" width="30" property="java"/>
+			<TableViewerColumn text="{x:Static m:Messages.WorkspaceList_VM Parameters}" width="85" property="vmArgs"/>
 		</TableViewer.columns>
 		<TableViewer.table headerVisible="true"/>
 		<TableViewer.labelProvider>

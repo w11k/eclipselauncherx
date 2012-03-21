@@ -1,23 +1,24 @@
 <Composite xmlns="http://www.eclipse.org/xwt/presentation"
 	xmlns:x="http://www.eclipse.org/xwt"
 	xmlns:y="clr-namespace:com.weiglewilczek.xwt.launcher.model.ui"
+	xmlns:m="clr-namespace:com.weiglewilczek.xwt.launcher"
 	xmlns:j="clr-namespace:java.lang"
 	x:Class="com.weiglewilczek.xwt.launcher.workspacelist.GroupsView">
 	<Composite.layout>
 		<GridLayout numColumns="1" />
 	</Composite.layout>
-	<TreeViewer width="700" height="400" name="groups">
+	<TreeViewer width="700" height="400" name="groups" x:Style="FULL_SELECTION">
 		<TreeViewer.control.layoutdata>
 			<GridData horizontalAlignment="FILL"
 				grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true"
 				verticalAlignment="FILL"></GridData>
 		</TreeViewer.control.layoutdata>
 		<TreeViewer.tree>
-			<TreeColumn text="Name" width="200" name="nameColumn"/>
-			<TreeColumn text="Workspace" width="230"/>
-			<TreeColumn text="Eclipse" width="80"/>
-			<TreeColumn text="Java" width="30"/>
-			<TreeColumn text="VM Parameters" width="85"/>
+			<TreeColumn text="{x:Static m:Messages.GroupsView_Name}" width="200" name="nameColumn"/>
+			<TreeColumn text="{x:Static m:Messages.GroupsView_Workspace}" width="230"/>
+			<TreeColumn text="{x:Static m:Messages.GroupsView_Eclipse}" width="80"/>
+			<TreeColumn text="{x:Static m:Messages.GroupsView_Java}" width="30"/>
+			<TreeColumn text="{x:Static m:Messages.GroupsView_VMParameters}" width="85"/>
 		</TreeViewer.tree>
 		<TreeViewer.labelProvider>
 			<y:TableLabelProvider/>
