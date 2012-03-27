@@ -201,7 +201,6 @@ public class ImportExportManager {
 				.getInstance().enumerateAll());
 
 		// remove default group
-		// FIXME won't do
 		groupsToImport.remove(groupManager.get(-1l));
 		actualGroups.remove(GroupManager.getInstance().get(-1l));
 

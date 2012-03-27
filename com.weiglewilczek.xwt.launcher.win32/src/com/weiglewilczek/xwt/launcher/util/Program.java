@@ -38,7 +38,6 @@ public class Program implements IProgram {
 		Runtime.getRuntime().exec(getCommands(configuration));
 	}
 
-	// TODO: test java or eclipse or workspace on other volume as "C:\"
 	private String getCommands(LaunchConfiguration configuration)
 			throws Exception {
 		String eclipseHomePath = configuration.getEclipse()
