@@ -7,7 +7,7 @@
 	<Composite.layout>
 		<GridLayout numColumns="1" />
 	</Composite.layout>
-	<TableViewer width="600" height="400" input="{Binding path=launchConfigurations}" name="workspaceList" x:Style="FULL_SELECTION">
+	<TableViewer width="600" height="400" input="{Binding path=launchConfigurations}" name="workspaceList" x:Style="FULL_SELECTION | BORDER">
 		<TableViewer.control.layoutdata>
 			<GridData horizontalAlignment="FILL"
 				grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true"

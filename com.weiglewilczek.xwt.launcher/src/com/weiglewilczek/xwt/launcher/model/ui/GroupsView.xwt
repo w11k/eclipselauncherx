@@ -7,7 +7,7 @@
 	<Composite.layout>
 		<GridLayout numColumns="1" />
 	</Composite.layout>
-	<TreeViewer width="700" height="400" name="groups" x:Style="FULL_SELECTION">
+	<TreeViewer width="700" height="400" name="groups" x:Style="FULL_SELECTION | BORDER">
 		<TreeViewer.control.layoutdata>
 			<GridData horizontalAlignment="FILL"
 				grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true"

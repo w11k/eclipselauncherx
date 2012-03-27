@@ -132,6 +132,13 @@ public class GroupsView extends XWTViewPart implements IListener {
 										.compareTo(
 												launchConfiguration2.getName());
 							}
+							if (object1 instanceof ObservableGroup
+									&& object2 instanceof ObservableGroup) {
+								ObservableGroup group1 = (ObservableGroup) object1;
+								ObservableGroup group2 = (ObservableGroup) object2;
+								return group1.getGroup().getName()
+										.compareTo(group2.getGroup().getName());
+							}
 
 							return 0;
 						}
